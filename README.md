@@ -1,8 +1,6 @@
-# web-dev-template
+Hi, I am Jiangtao Xu, a graduate student at Northeastern, used to be an undergraduate study at Beijing Jiaotong University. 
 
-1. git clone https://github.com/jannunzi/web-dev-template.git
-1. cd web-dev-template
-1. npm install
-1. mongod
-1. node server.js
-1. browse to localhost:3000
+This repository is for webdev
+
+Here is a the same project on Heroku: https://xu-jiangtao-webdev.herokuapp.com/
+
