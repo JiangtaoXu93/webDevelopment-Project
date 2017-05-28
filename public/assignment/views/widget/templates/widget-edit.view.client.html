@@ -1,0 +1,34 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="">
+                {{model.getHeader()}}
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateWidget(model.widgetId,model.widget)" class="navbar-link">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div ng-include="model.widgetUrl(model.widget)"></div>
+
+    <a ng-show="model.updateButton" class="btn btn-block btn-success">Upload</a>
+    <a ng-click="model.deleteWidget(model.widgetId)" class="btn btn-block btn-danger">Delete</a>
+    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+       class="btn btn-block btn-primary">Cancel</a>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+
+</nav>

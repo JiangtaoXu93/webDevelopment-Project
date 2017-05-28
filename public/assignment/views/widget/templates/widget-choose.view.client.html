@@ -1,0 +1,65 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="">
+                Choose Widget
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="#" class="navbar-link">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <ul class="list-group">
+
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-lg-5 col-md-8 col-xs-11">
+                    <a ng-click="model.createWidget('HEADING') " class="navbar-link">
+                        <span>Heading</span>
+                    </a>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-lg-5 col-md-8 col-xs-11">
+                    <a ng-click="model.createWidget('IMAGE')">
+                        Image
+                    </a>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+        <div class="row">
+            <div class="col-lg-5 col-md-8 col-xs-11">
+                <a ng-click="model.createWidget('YOUTUBE')">
+                    YouTube
+                </a>
+            </div>
+        </div>
+    </li>
+
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-lg-5 col-md-8 col-xs-11">
+                    <a ng-click="model.createWidget('HTML')">
+                        HTML
+                    </a>
+                </div>
+            </div>
+        </li>
+
+    </ul>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

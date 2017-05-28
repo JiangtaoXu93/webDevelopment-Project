@@ -1,0 +1,18 @@
+<div class="container-fluid">
+
+    <label for="text">Text</label>
+    <input class="form-control"
+           placeholder="Input Heading Text"
+           ng-model="model.widget.text"
+           id="text"/>
+
+    <label for="size">Size</label>
+    <select id="size"
+            class="form-control"
+            ng-options="option.name for option in model.optionData.availableOptions track by option.id"
+            ng-model="model.optionData.selectedOption">
+
+
+    </select>
+
+</div>

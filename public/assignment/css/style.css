@@ -14,6 +14,7 @@ body {
 }
 
 .navbar-default {
+    background-image: none;
     background-color:darkgrey;
     border-color: darkgrey             ;
 }
@@ -49,6 +50,7 @@ body {
     opacity: 0.9;
     padding: 5px;
     border-bottom-left-radius: 10px;
+    z-index: 10;
 }
 
 .wd-video  > .wd-widget-toolbar {
@@ -82,3 +84,4 @@ body {
     width: 100%;
     height: 100%;
 }
+

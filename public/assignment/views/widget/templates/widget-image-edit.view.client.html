@@ -1,0 +1,30 @@
+<div class="container-fluid">
+
+    <label for="name">Name</label>
+    <input class="form-control"
+           placeholder="Name of the Image"
+           id="name"/>
+
+    <label for="text">Text</label>
+    <input class="form-control"
+           placeholder="Text of the Image"
+
+           id="text"/>
+
+    <label for="url">URL</label>
+    <input class="form-control"
+           placeholder="URL of the Image"
+           ng-model="model.widget.url"
+           id="url"/>
+
+    <label for="width">Width</label>
+    <select id="width"
+            class="form-control"
+            ng-options="option.name for option in model.optionWidthData.availableWidthOptions track by option.id"
+            ng-model="model.optionWidthData.selectedWidthOption">
+    </select>
+
+    <label for="file">Upload</label>
+    <input id="file" multiple type="file" class="form-control"/>
+
+</div>

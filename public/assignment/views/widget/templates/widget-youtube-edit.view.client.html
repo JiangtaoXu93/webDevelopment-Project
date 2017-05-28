@@ -1,0 +1,31 @@
+<div class="container-fluid">
+
+    <label for="name">Name</label>
+    <input class="form-control"
+           placeholder="Name of Youtube"
+           ng-model="model.widget.name"
+           id="name"/>
+
+    <label for="text">Description</label>
+    <input class="form-control"
+           placeholder="Description of Youtube"
+           ng-model="model.widget.description"
+           id="text"/>
+
+    <label for="url">URL</label>
+    <input class="form-control"
+           placeholder="URL of Youtube"
+           ng-model="model.widget.url"
+           id="url"/>
+
+    <label for="width">Width</label>
+    <select id="width"
+            class="form-control"
+            ng-options="option.name for option in model.optionWidthData.availableWidthOptions track by option.id"
+            ng-model="model.optionWidthData.selectedWidthOption">>
+
+    </select>
+
+
+
+</div>
