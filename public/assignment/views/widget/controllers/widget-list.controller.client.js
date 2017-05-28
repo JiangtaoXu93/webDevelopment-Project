@@ -30,20 +30,8 @@
         
         function trust(html) {
            // scrubbing the html
-           //  var tagBody = '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*';
-           //      tagOrComment = new RegExp(
-           //          '<(?:' +
-           //          // Comment body.
-           //          '!--(?:(?:-*[^->])*--+|-?)' +
-           //          // Special "raw text" elements whose content should be elided.
-           //          '|script\\b' + '>[\\s\\S]*?</script\\s*' +
-           //          '|style\\b' + '>[\\s\\S]*?</style\\s*' +
-           //          // Regular name
-           //          '|/?[a-z]' +
-           //
-           //          ')>', 'gi'
-           //      );
-           //  html = html.replace(tagOrComment, '');
+            html = html.replace(/<.*?script.*?>.*?<\/.*?script.*?>/igm, '');
+            html = html.replace(/<.*?link.*?>/igm, '');
 
             console.log(html);
             return $sce.trustAsHtml(html);
