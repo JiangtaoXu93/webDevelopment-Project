@@ -14,7 +14,11 @@
         model.createPage = createPage;
 
         function init() {
-            model.pages = pageService.findPageByWebsiteId(model.websiteId);
+            pageService.findPageByWebsiteId(model.websiteId)
+                .then(function (found) {
+                    model.pages = found;
+                });
+            // model.pages = pageService.findPageByWebsiteId(model.websiteId);
         }
         init();
 
@@ -30,8 +34,11 @@
                 }, 3000)
             }else{
                 page.websiteId = model.websiteId;
-                pageService.createPage(page);
-                $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page');
+                pageService.createPage(page)
+                    .then(function () {
+                        $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page');
+                    });
+
             }
 
         }

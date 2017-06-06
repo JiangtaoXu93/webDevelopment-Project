@@ -15,26 +15,40 @@
         model.updatePage = updatePage;
 
         function init() {
-            model.pages = pageService.findPageByWebsiteId(model.websiteId);
-            model.page = pageService.findPageById(model.pageId);
-            var pageEdit = {
-                _id : model.page._id,
-                name : model.page.name,
-                websiteId : model.page.websiteId,
-                description : model.page.description
-            }
-            model.pageEdit = pageEdit;
+            pageService.findPageByWebsiteId(model.websiteId)
+                .then(function (found) {
+                    model.pages = found;
+                });
+
+            pageService.findPageById(model.pageId)
+                .then(function (found) {
+                    var pageEdit = {
+                        _id : found._id,
+                        name : found.name,
+                        websiteId : found.websiteId,
+                        description : found.description
+                    }
+                    model.pageEdit = pageEdit;
+                    model.page = found;
+                });
+
         }
         init();
 
         function deletePage(pageId) {
-            pageService.deletePage(pageId);
-            $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page');
+            pageService.deletePage(pageId)
+                .then(function () {
+                    $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page');
+                });
+
         }
 
         function updatePage(pageId, page) {
-            pageService.updatePage(pageId,page);
-            $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page');
+            pageService.updatePage(pageId,page)
+                .then(function () {
+                    $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page');
+                });
+
         }
     }
 })();

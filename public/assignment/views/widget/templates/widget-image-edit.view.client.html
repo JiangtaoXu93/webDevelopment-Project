@@ -3,12 +3,13 @@
     <label for="name">Name</label>
     <input class="form-control"
            placeholder="Name of the Image"
+           ng-model="model.widget.name"
            id="name"/>
 
     <label for="text">Text</label>
     <input class="form-control"
            placeholder="Text of the Image"
-
+           ng-model="model.widget.text"
            id="text"/>
 
     <label for="url">URL</label>
@@ -24,7 +25,23 @@
             ng-model="model.optionWidthData.selectedWidthOption">
     </select>
 
-    <label for="file">Upload</label>
-    <input id="file" multiple type="file" class="form-control"/>
+    <!--<label for="file">Upload</label>-->
+    <!--<input id="file"-->
+           <!--multiple type="file"-->
+           <!--class="form-control"/>-->
+
+    <form class = "wd-form" action="/api/upload"   method="post" enctype="multipart/form-data">
+        <input  name="myFile"    type="file" class="form-control"/>
+        <input  name="width"     value="{{model.widget.width}}" style="display: none"/>
+        <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
+        <input  name="websiteId" value="{{model.websiteId}}"   style="display: none"/>
+        <input  name="pageId"    value="{{model.pageId}}"   style="display: none"/>
+        <input  name="widgetId"  value="{{model.widget._id}}"   style="display: none"/>
+        <button type="submit"    class="btn btn-block btn-primary">Upload Image</button>
+    </form>
+
+    <a  ng-click="model.deleteWidget(model.widgetId)" class="btn btn-block btn-danger">Delete</a>
+    <a  href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+       class="btn btn-block btn-primary">Cancel</a>
 
 </div>

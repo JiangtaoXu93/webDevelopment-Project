@@ -17,6 +17,10 @@
     {{model.error}}
 </div>
 
+<div ng-show="model.message" class="alert alert-info">
+    {{model.message}}
+</div>
+
 
     <div class="container-fluid">
         <form>
@@ -54,10 +58,14 @@
             </div>
         </form>
 
+        <a ng-click="model.updateUser(model.userId, model.user)"
+           class="btn btn-success btn-block">Update</a>
         <a class="btn btn-primary btn-block"
            href="#!/user/{{model.userId}}/website">Websites</a>
         <a class="btn btn-danger  btn-block"
            href="#!/login">Logout</a>
+        <a ng-click="model.deleteUser(model.user)"
+           class="btn btn-danger btn-block">Unregister</a>
     </div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>

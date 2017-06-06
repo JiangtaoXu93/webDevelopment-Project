@@ -11,10 +11,19 @@
         model.userId = $routeParams['userId'];
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
-        model.widgets = widgetService.findWidgetsByPageId(model.pageId);
+
         model.trust = trust;
         model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
         model.widgetUrl = widgetUrl;
+
+        function init (){
+            widgetService.findWidgetsByPageId(model.pageId)
+                .then(function (found) {
+                    model.widgets = found;
+                });
+        }
+
+        init();
 
         function widgetUrl(widget) {
             var url = 'views/widget/templates/widget-'+widget.widgetType.toLowerCase()+'.view.client.html';
@@ -33,7 +42,6 @@
             html = html.replace(/<.*?script.*?>.*?<\/.*?script.*?>/igm, '');
             html = html.replace(/<.*?link.*?>/igm, '');
 
-            console.log(html);
             return $sce.trustAsHtml(html);
         }
     }

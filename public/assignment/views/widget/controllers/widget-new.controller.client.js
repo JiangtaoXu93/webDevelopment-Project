@@ -20,8 +20,11 @@
                 widgetType : widgetType,
                 pageId :model.pageId
             };
-            widgetService.createWidget(widget);
-            $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page/' + model.pageId + '/widget/' + widget._id );
+            widgetService.createWidget(widget)
+                .then(function () {
+                    $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page/' + model.pageId + '/widget/' + widget._id );
+                });
+
         }
 
     }

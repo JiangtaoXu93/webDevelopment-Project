@@ -14,26 +14,43 @@
         model.updateWebsite = updateWebsite;
 
         function init() {
-            model.websites = websiteService.findWebsitesByUser(model.userId);
-            model.website = websiteService.findWebsiteById(model.websiteId);
-            var websiteEdit = {
-                _id : model.website._id,
-                name : model.website.name,
-                developerId : model.website.developerId,
-                description : model.website.description
-            }
-            model.websiteEdit = websiteEdit;
+            websiteService
+                .findWebsitesByUser(model.userId)
+                .then(function (found) {
+                    model.websites = found;
+                });
+
+            websiteService.findWebsiteById(model.websiteId)
+                .then(function (found) {
+                    var websiteEdit = {
+                        _id : found._id,
+                        name : found.name,
+                        developerId : found.developerId,
+                        description : found.description
+                    }
+                    model.website = found;
+                    model.websiteEdit = websiteEdit;
+
+                });
+
         }
         init();
 
         function deleteWebsite(websiteId) {
-            websiteService.deleteWebsite(websiteId);
-            $location.url('/user/'+model.userId+'/website');
+            // websiteService.deleteWebsite(websiteId);
+            // $location.url('/user/'+model.userId+'/website');
+
+            websiteService.deleteWebsite(websiteId)
+                .then(function () {
+                    $location.url('/user/'+model.userId+'/website');
+                });
         }
 
         function updateWebsite(websiteId, website) {
-            websiteService.updateWebsite(websiteId,website);
-            $location.url('/user/'+model.userId+'/website');
+            websiteService.updateWebsite(websiteId,website)
+                .then(function () {
+                    $location.url('/user/'+model.userId+'/website')
+                });
         }
     }
 })();

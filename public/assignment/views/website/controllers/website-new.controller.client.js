@@ -13,7 +13,12 @@
         model.createWebsite = createWebsite;
 
         function init() {
-            model.websites = websiteService.findWebsitesByUser(model.userId);
+            websiteService.findWebsitesByUser(model.userId)
+                .then(function (found) {
+                    model.websites = found;
+                });
+
+            // model.websites = websiteService.findWebsitesByUser(model.userId);
         }
         init();
 
@@ -29,8 +34,11 @@
                 }, 3000)
             }else{
                 website.developerId = model.userId;
-                websiteService.createWebsite(website);
-                $location.url('/user/'+model.userId+'/website');
+                websiteService.createWebsite(website)
+                    .then(function () {
+                        $location.url('/user/'+model.userId+'/website');
+                    });
+
             }
 
         }
