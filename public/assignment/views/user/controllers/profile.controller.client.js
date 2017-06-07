@@ -9,6 +9,7 @@
 
         model.userId = $routeParams['userId'];
         model.deleteUser = deleteUser;
+        var initialUserName;
 
         //model.user = userService.findUserById(model.userId);
 
@@ -18,21 +19,28 @@
         init();
 
         function updateUser(uid, u){
+            if (model.user.name !== initialUserName){
+                userService
+                    .findUserByUsername(u.username)
+                    .then(function () {
+                        model.message = "This user name is existed, please try another";
+                        $timeout(function() {
 
-            userService
-                .findUserByUsername(u.username)
-                .then(function () {
-                    model.message = "This user name is existed, please try another";
-                    $timeout(function() {
+                            model.message = false;
 
-                        model.message = false;
+                        }, 3000)
+                    }, function () {
+                        userService
+                            .updateUser(uid, u)
+                            .then(updateSuccess,updateFail);
+                    })
+            }else{
+                userService
+                    .updateUser(uid, u)
+                    .then(updateSuccess,updateFail);
+            }
 
-                    }, 3000)
-                }, function () {
-                    userService
-                        .updateUser(uid, u)
-                        .then(updateSuccess,updateFail);
-                })
+
 
 
 
@@ -66,6 +74,7 @@
 
         function renderUser (user) {
             model.user = user;
+            initialUserName = user.name;
         }
 
         function userError(error) {
