@@ -19,7 +19,7 @@
         init();
 
         function updateUser(uid, u){
-            if (model.user.name !== initialUserName){
+            if (model.user.username !== initialUserName){
                 userService
                     .findUserByUsername(u.username)
                     .then(function () {
@@ -74,7 +74,7 @@
 
         function renderUser (user) {
             model.user = user;
-            initialUserName = user.name;
+            initialUserName = user.username;
         }
 
         function userError(error) {
