@@ -26,21 +26,12 @@ function findAllWidgetsForPage(pageId) {
     return pageModel.findPageById(pageId)
         .then(function (page) {
             var ids = page.widgets;
-<<<<<<< HEAD
-            console.log(ids);
-
-=======
->>>>>>> origin/master
             return widgetModel.find({ _id: { $in: ids } }).exec(function(err, docs) {
                 docs.sort(function(a, b) {
                     // Sort docs by the order of their _id values in ids.
                     return ids.indexOf(a._id) - ids.indexOf(b._id);
                 });
             });
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
         })
 
 

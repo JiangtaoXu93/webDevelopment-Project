@@ -59,11 +59,7 @@ function deleteWidget(pageId, widgetId) {
     return pageModel
         .findById(pageId)
         .then(function (page) {
-<<<<<<< HEAD
             var index = page.widgets.indexOf(widgetId);
-=======
-            var index = page.widgets.indexOf(pageId);
->>>>>>> origin/master
             page.widgets.splice(index, 1);
             return page.save();
         });
