@@ -16,14 +16,18 @@
 
         function createWidget(widgetType){
             var widget = {
-                _id : (new Date()).getTime() + "",
-                widgetType : widgetType,
+                type : widgetType,
                 pageId :model.pageId
             };
             widgetService.createWidget(widget)
-                .then(function () {
-                    $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page/' + model.pageId + '/widget/' + widget._id );
+                .then(function (data) {
+                    var widgetId = data.widgets[data.widgets.length - 1];
+                    $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page/' + model.pageId + '/widget/new/' + widgetId );
                 });
+
+          //  $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page/' + model.pageId + '/widget/new/' + widgetType);
+
+
 
         }
 

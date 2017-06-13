@@ -1,6 +1,13 @@
-<div class="container-fluid">
+<div text-angular class="container-fluid">
 
     <label for="text">Text</label>
+    <div ng-model="model.widget.text"
+         text-angular
+         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+        ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+        ['indent','outdent'],['html']]">
+    </div>
+
     <textarea class="form-control"
            placeholder="Input HTML Text"
            ng-model="model.widget.text"

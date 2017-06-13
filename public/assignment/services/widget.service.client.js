@@ -14,7 +14,6 @@
 
 
         function createWidget(widget) {
-            // widgets.push(widget);
 
             var url = "/api/page/"+ widget.pageId+"/widget";
             return $http.post(url, widget)
