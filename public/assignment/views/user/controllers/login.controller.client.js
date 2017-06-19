@@ -9,27 +9,60 @@
 
         model.login = login;
 
+        model.submit = submit;
+
+        function submit() {
+            return false;
+        }
+
         function login(username, password) {
-           // var found = userService.findUserByCredentials(username, password);
 
-            userService
-                .findUserByCredentials(username, password)
-                .then(function (found) {
-                    $location.url('/user/' + found._id);
-                },function(){
-                    model.message = "sorry, " + username + " and password are not found. please try again!";
-                    $timeout(function() {
+            if (username === "" || typeof username  === 'undefined' || username === null){
+                model.message = "user name is required!";
+                $timeout(function() {
 
-                        model.message = false;
+                    model.message = false;
 
-                    }, 3000)
-                });
+                }, 3000)
+            }else if (password === "" || typeof password  === 'undefined' || password === null ){
+                model.message = "password is required!";
+                $timeout(function() {
 
-            // if(found !== null) {
-            //     $location.url('/user/' + found._id);
-            // } else {
-            //     model.message = "sorry, " + username + " not found. please try again!";
-            // }
+                    model.message = false;
+
+                }, 3000)
+            }else{
+                userService
+                    .login(username, password)
+                    .then(function (found) {
+                        $location.url('/profile');
+                    },function(){
+                        model.message = "sorry, username " + username + " and password are not found. please try again!";
+                        $timeout(function() {
+
+                            model.message = false;
+
+                        }, 3000)
+                    });
+            }
+
+
+
+
+            // userService
+            //     .findUserByCredentials(username, password)
+            //     .then(function (found) {
+            //         $location.url('/user/' + found._id);
+            //     },function(){
+            //         model.message = "sorry, " + username + " and password are not found. please try again!";
+            //         $timeout(function() {
+            //
+            //             model.message = false;
+            //
+            //         }, 3000)
+            //     });
+
+
         }
     }
 })();

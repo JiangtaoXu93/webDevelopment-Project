@@ -3,9 +3,15 @@
         .module('WebAppMaker')
         .controller('RegisterController', RegisterController);
     
-    function RegisterController($location, userService) {
+    function RegisterController($location, userService,$rootScope) {
 
         var model = this;
+
+        model.submit = submit;
+
+        function submit() {
+            return false;
+        }
 
         model.register = register;
 
@@ -22,8 +28,8 @@
             }
 
             if (typeof email==='undefined'){
-                model.error="email is not correct";
-                return;
+                email = null;
+                // return;
             }
 
             userService
@@ -41,9 +47,12 @@
                             lastName:lastName
                         };
                         userService
-                            .createUser(newUser)
+                            .register(newUser)
                             .then(function (user) {
-                                $location.url('/user/' + user._id);
+                                var user = user.data;
+                                $rootScope.currentUser = user;
+                                $location.url("/profile");
+
                             });
                     }
                 );

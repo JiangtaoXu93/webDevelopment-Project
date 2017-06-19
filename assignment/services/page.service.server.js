@@ -53,7 +53,7 @@ function findPageById(req,res) {
 function updatePage(req, res){
     var page = req.body;
 
-    websiteModel.updateWebsite(page._id,page)
+    pageModel.updatePage(page._id,page)
         .then(function (status) {
             res.send(status);
         });

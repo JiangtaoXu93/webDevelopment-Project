@@ -88,3 +88,7 @@ body {
     margin-bottom: 5px;
 }
 
+form.ng-submitted input.ng-invalid {
+    border:1px solid #f00;
+}
+

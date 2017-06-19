@@ -6,12 +6,18 @@
     function NewPageController($routeParams,
                                    $location,
                                   $timeout,
+                               currentUser,
                                    pageService) {
         var model = this;
 
-        model.userId = $routeParams['userId'];
+        model.userId =currentUser._id;
         model.websiteId = $routeParams['websiteId'];
         model.createPage = createPage;
+        model.submit = submit;
+
+        function submit() {
+            return false;
+        }
 
         function init() {
             pageService.findPageByWebsiteId(model.websiteId)
@@ -25,7 +31,15 @@
         function createPage(page) {
             if (typeof page === 'undefined') {
 
-                model.error = "name and description should not be both empty";
+                model.error = "name should not be empty";
+
+                $timeout(function () {
+
+                    model.error = false;
+
+                }, 3000)
+            }else if (typeof page.name ==='undefined'){
+                model.error = "name should not be empty";
 
                 $timeout(function () {
 
@@ -36,7 +50,7 @@
                 page.websiteId = model.websiteId;
                 pageService.createPage(page)
                     .then(function () {
-                        $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page');
+                        $location.url('/website/' + model.websiteId + '/page');
                     });
 
             }

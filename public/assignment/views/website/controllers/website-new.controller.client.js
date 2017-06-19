@@ -6,11 +6,17 @@
     function NewWebsiteController($routeParams,
                                    $location,
                                   $timeout,
+                                  currentUser,
                                    websiteService) {
         var model = this;
 
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.createWebsite = createWebsite;
+        model.submit = submit;
+
+        function submit() {
+            return false;
+        }
 
         function init() {
             websiteService.findWebsitesByUser(model.userId)
@@ -25,18 +31,27 @@
         function createWebsite(website) {
             if (typeof website === 'undefined') {
 
-                model.error = "name and description should not be both empty";
+                model.error = "name should not be empty";
 
                 $timeout(function () {
 
                     model.error = false;
 
                 }, 3000)
-            }else{
+            }else if (typeof website.name ==='undefined'){
+                model.error = "name should not be empty";
+
+                $timeout(function () {
+
+                    model.error = false;
+
+                }, 3000)
+            }
+            else{
                 website.developerId = model.userId;
                 websiteService.createWebsite(website)
                     .then(function () {
-                        $location.url('/user/'+model.userId+'/website');
+                        $location.url('/website');
                     });
 
             }

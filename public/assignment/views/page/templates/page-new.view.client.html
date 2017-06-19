@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
+                <a href="#!/website/{{model.websiteId}}/page" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </p>
@@ -45,7 +45,7 @@
                 <li ng-repeat="page in model.pages" class="list-group-item">
                     <div class="row">
                         <div class="col-lg-5 col-md-8 col-xs-11">
-                            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
+                            <a href="#!/website/{{model.websiteId}}/page/{{page._id}}/widget">
                                 {{page.name}}
                             </a>
                         </div>
@@ -56,7 +56,7 @@
                             {{page._website.name}}
                         </div>
                         <div class="col-xs-1">
-                            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}">
+                            <a href="#!/website/{{model.websiteId}}/page/{{page._id}}">
                                 <span class="glyphicon glyphicon-cog pull-right"></span>
                             </a>
                         </div>
@@ -66,11 +66,12 @@
         </div>
         <div class="col-xs-12 col-sm-8">
 
+            <form novalidate ng-submit="model.submit()">
             <label for="name">Name</label>
             <input class="form-control"
                    ng-model="pageNew.name"
                    placeholder="This is name"
-                   id="name"/>
+                   id="name" required/>
 
             <label for="description">Description</label>
             <textarea id="description"
@@ -79,8 +80,10 @@
                       placeholder="This is description"
                       class="form-control"></textarea>
 
-            <a ng-click="model.createPage(pageNew)" class="btn btn-block btn-success">Create</a>
-            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page" class="btn btn-block btn-danger">Cancel</a>
+            <input type="submit" ng-click="model.createPage(pageNew)" class="btn btn-block btn-success"
+            value="Create"/>
+            <a href="#!/website/{{model.websiteId}}/page" class="btn btn-block btn-danger">Cancel</a>
+            </form>
         </div>
     </div>
 

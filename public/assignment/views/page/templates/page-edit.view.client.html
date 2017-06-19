@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
+                <a href="#!/website/{{model.websiteId}}/page" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </p>
@@ -42,7 +42,7 @@
                 <li ng-repeat="page in model.pages" class="list-group-item">
                     <div class="row">
                         <div class="col-lg-5 col-md-8 col-xs-11">
-                            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
+                            <a href="#!/website/{{model.websiteId}}/page/{{page._id}}/widget">
                                 {{page.name}}
                             </a>
                         </div>
@@ -53,7 +53,7 @@
                             {{page._website.name}}
                         </div>
                         <div class="col-xs-1">
-                            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}">
+                            <a href="#!/website/{{model.websiteId}}/page/{{page._id}}">
                                 <span class="glyphicon glyphicon-cog pull-right"></span>
                             </a>
                         </div>
@@ -78,7 +78,7 @@
                       class="form-control"></textarea>
 
             <a ng-click="model.deletePage(model.pageId)" class="btn btn-block btn-danger">Delete</a>
-            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page" class="btn btn-block btn-primary">Cancel</a>
+            <a href="#!/website/{{model.websiteId}}/page" class="btn btn-block btn-primary">Cancel</a>
         </div>
     </div>
 

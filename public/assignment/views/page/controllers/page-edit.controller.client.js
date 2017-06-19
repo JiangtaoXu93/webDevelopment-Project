@@ -5,10 +5,11 @@
 
     function EditPageController($routeParams,
                                    $location,
+                                currentUser,
                                    pageService) {
         var model = this;
 
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.pageId = $routeParams['pageId'];
         model.websiteId = $routeParams['websiteId'];
         model.deletePage = deletePage;
@@ -38,16 +39,28 @@
         function deletePage(pageId) {
             pageService.deletePage(pageId)
                 .then(function () {
-                    $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page');
+                    $location.url('/website/' + model.websiteId + '/page');
                 });
 
         }
 
         function updatePage(pageId, page) {
-            pageService.updatePage(pageId,page)
-                .then(function () {
-                    $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page');
-                });
+            if (typeof page.name ==='undefined' || page.name ===''|| page.name ===null){
+                model.error = "name should not be empty";
+
+                $timeout(function () {
+
+                    model.error = false;
+
+                }, 3000)
+            }else{
+                pageService.updatePage(pageId,page)
+                    .then(function () {
+                        $location.url('/website/' + model.websiteId + '/page');
+                    });
+            }
+
+
 
         }
     }

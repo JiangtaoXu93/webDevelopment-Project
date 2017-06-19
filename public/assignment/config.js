@@ -18,73 +18,144 @@
                 controller: 'RegisterController',
                 controllerAs: 'model'
             })
-            .when('/user/:userId', {
+            .when('/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'ProfileController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:userId/website', {
+            .when('/website', {
                 templateUrl: 'views/website/templates/website-list.view.client.html',
                 controller: 'WebsiteListController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:userId/website/new', {
+            .when('/website/new', {
                 templateUrl: 'views/website/templates/website-new.view.client.html',
                 controller: 'NewWebsiteController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:userId/website/:websiteId', {
+            .when('/website/:websiteId', {
                 templateUrl: 'views/website/templates/website-edit.view.client.html',
                 controller: 'EditWebsiteController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:userId/website/:websiteId/page/new', {
+            .when('/website/:websiteId/page/new', {
                 templateUrl: 'views/page/templates/page-new.view.client.html',
                 controller: 'NewPageController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:userId/website/:websiteId/page/:pageId', {
+            .when('/website/:websiteId/page/:pageId', {
                 templateUrl: 'views/page/templates/page-edit.view.client.html',
                 controller: 'EditPageController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:userId/website/:websiteId/page', {
+            .when('/website/:websiteId/page', {
                 templateUrl: 'views/page/templates/page-list.view.client.html',
                 controller: 'PageListController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:userId/website/:websiteId/page/:pageId/widget', {
+            .when('/website/:websiteId/page/:pageId/widget', {
                 templateUrl: 'views/widget/templates/widget-list.view.client.html',
                 controller: 'WidgetListController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:userId/website/:websiteId/page/:pageId/widget/new', {
+            .when('/website/:websiteId/page/:pageId/widget/new', {
                 templateUrl: 'views/widget/templates/widget-choose.view.client.html',
                 controller: 'NewWidgetController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:userId/website/:websiteId/page/:pageId/widget/new/:widgetId', {
+            .when('/website/:websiteId/page/:pageId/widget/new/:widgetId', {
                 templateUrl: 'views/widget/templates/widget-edit.view.client.html',
                 controller: 'EditWidgetController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:userId/website/:websiteId/page/:pageId/widget/new/:widgetId/search', {
+            .when('/website/:websiteId/page/:pageId/widget/new/:widgetId/search', {
                 templateUrl: 'views/widget/templates/widget-flickr-search.view.client.html',
                 controller: 'ImageSearchController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/user/:userId/website/:websiteId/page/:pageId/widget/:widgetId', {
+            .when('/website/:websiteId/page/:pageId/widget/:widgetId', {
                 templateUrl: 'views/widget/templates/widget-edit.view.client.html',
                 controller: 'EditWidgetController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+        }
             })
-            .when('/user/:userId/website/:websiteId/page/:pageId/widget/:widgetId/search', {
+            .when('/website/:websiteId/page/:pageId/widget/:widgetId/search', {
                 templateUrl: 'views/widget/templates/widget-flickr-search.view.client.html',
                 controller: 'ImageSearchController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
 
+        function checkLoggedIn(userService, $q, $location) {
+            var deferred = $q.defer();
 
+            userService
+                .loggedin()
+                .then(function (user) {
+                    if(user === '0') {
+                        deferred.reject();
+                        $location.url('/login');
+                    } else {
+                        deferred.resolve(user);
+                    }
+                });
+
+            return deferred.promise;
+        }
+
+        function checkCurrentUser(userService, $q, $location) {
+            var deferred = $q.defer();
+
+            userService
+                .loggedin()
+                .then(function (user) {
+                    if(user === '0') {
+                        deferred.resolve({});
+                        // $location.url('/login');
+                    } else {
+                        deferred.resolve(user);
+                    }
+                });
+
+            return deferred.promise;
+        }
 
     }
 })();

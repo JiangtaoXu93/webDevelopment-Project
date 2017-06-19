@@ -1,6 +1,10 @@
-<div text-angular class="container-fluid">
+<div class="container-fluid">
+    <label for="name">Name</label>
+    <input class="form-control"
+           placeholder="Input HTML Name"
+           ng-model="model.widget.name"
+           id="name"/>
 
-    <label for="text">Text</label>
     <div ng-model="model.widget.text"
          text-angular
          ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
@@ -8,10 +12,10 @@
         ['indent','outdent'],['html']]">
     </div>
 
-    <textarea class="form-control"
-           placeholder="Input HTML Text"
-           ng-model="model.widget.text"
-           id="text"></textarea>
+    <!--<textarea class="form-control"-->
+           <!--placeholder="Input HTML Text"-->
+           <!--ng-model="model.widget.text"-->
+           <!--id="text"></textarea>-->
 
 
 

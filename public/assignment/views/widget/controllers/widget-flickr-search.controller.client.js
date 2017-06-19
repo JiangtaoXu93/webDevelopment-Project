@@ -5,11 +5,12 @@
 
     function ImageSearchController($routeParams,
                                  $location,
+                                   currentUser,
                                    FlickrService,
                                    widgetService) {
         var model = this;
 
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.pageId = $routeParams['pageId'];
         model.websiteId = $routeParams['websiteId'];
         model.widgetId = $routeParams['widgetId'];
@@ -50,10 +51,10 @@
             var link = url.split('/');
             var version = link[link.length - 3];
             if (version === 'new'){
-                $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page/' + model.pageId + '/widget/new/'
+                $location.url('/website/' + model.websiteId + '/page/' + model.pageId + '/widget/new/'
             + widgetId);
             }else{
-                $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page/' + model.pageId + '/widget/'
+                $location.url('/website/' + model.websiteId + '/page/' + model.pageId + '/widget/'
                     + widgetId);
             }
 

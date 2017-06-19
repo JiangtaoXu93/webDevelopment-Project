@@ -5,10 +5,12 @@
 
     function EditWidgetController($routeParams,
                                 $location,
+                                  currentUser,
+                                  $timeout,
                                 widgetService) {
         var model = this;
 
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.pageId = $routeParams['pageId'];
         model.websiteId = $routeParams['websiteId'];
         model.widgetId = $routeParams['widgetId'];
@@ -52,31 +54,45 @@
         function deleteWidget(widgetId) {
             widgetService.deleteWidget(widgetId)
                 .then(function () {
-                    $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+                    $location.url('/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
                 });
 
         }
 
         function updateWidget(widgetId, widget) {
-            if (typeof model.optionData !== 'undefined'){
-                widget.size = model.optionData.selectedOption.id ;
-            }
+            if(widget.name === null  || widget.name === '' ||typeof widget.name === 'undefined'){
+                model.error = "name should not be empty";
 
-            if (typeof model.optionWidthData !== 'undefined'){
-                widget.width = model.optionWidthData.selectedWidthOption.id;
-            }
+                $timeout(function () {
 
-            if (typeof widgetId ==='undefined'){
+                    model.error = false;
 
-                widgetService.createWidget(widget)
-                    .then(function () {
-                        $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
-                    });
+                }, 3000)
             }else{
-                widgetService.updateWidget(widgetId,widget)
-                    .then(function () {
-                        $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
-                    });
+
+                if (typeof model.optionData !== 'undefined'){
+                    widget.size = model.optionData.selectedOption.id ;
+                }
+
+                if (typeof model.optionWidthData !== 'undefined'){
+                    widget.width = model.optionWidthData.selectedWidthOption.id;
+                }
+
+                if (typeof widgetId ==='undefined'){
+
+                    widgetService.createWidget(widget)
+                        .then(function () {
+                            $location.url('/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+                        });
+                }else{
+                    widgetService.updateWidget(widgetId,widget)
+                        .then(function () {
+                            $location.url('/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+                        });
+                }
+
+
+
             }
 
 
@@ -109,7 +125,7 @@
                 widgetService.deleteWidget(widgetId)
                     .then(function () {})
             }
-            $location.url('/user/'+model.userId+'/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+            $location.url('/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
 
         }
 

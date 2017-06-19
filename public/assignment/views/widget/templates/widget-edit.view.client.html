@@ -20,6 +20,10 @@
 </nav>
 
 <div class="container-fluid">
+
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
     <div ng-include="model.widgetUrl(model.widget)"></div>
 
     <!--<a ng-show="model.updateButton" class="btn btn-block btn-success">Upload</a>-->

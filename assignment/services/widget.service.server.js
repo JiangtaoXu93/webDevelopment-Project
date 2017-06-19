@@ -50,7 +50,7 @@ function uploadImage(req, res) {
             widget.url = '/assignment/uploads/'+filename;
 
             widgetModel.updateWidget(widgetId,widget).then(function () {
-                var callbackUrl   = "/assignment/#!/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/new/"+ widgetId;
+                var callbackUrl   = "/assignment/#!/website/"+websiteId+"/page/"+pageId+"/widget/new/"+ widgetId;
                 res.redirect(callbackUrl);
             })
 
