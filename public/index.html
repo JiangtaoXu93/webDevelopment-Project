@@ -3,28 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <title>Web Dev Course Home Page</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <!-- Custom styles for this template -->
+        <link href="assignment/vendor/bootstrap/theme.css" rel="stylesheet">
+        <link href="assignment/css/style.css" rel="stylesheet"/>
+        <link href="assignment/vendor/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
 </head>
-<body>
-    <h1>Web Dev Course Home Page</h1>
+<body class="body-background">
+<nav class="navbar navbar-fixed-top navbar-inverse" id="nav-home">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
 
-    <p>
-        Customize this home page to your linking.
-    </p>
+        <div class="collapse navbar-collapse" >
+            <ul class="nav navbar-nav">
+                <li><a href="#">
+                    <span class="glyphicon glyphicon-home">Home</span></a></li>
+                <li><a  href="project/index.html">
+                    <span class="glyphicon glyphicon-tasks">Project</span></a></li>
+                <li><a  href="assignment/index.html">
+                    <span class="glyphicon glyphicon-book">Assignment</span></a></li>
+                <li><a  href="https://github.com/JiangtaoXu93/xu-jiangtao-webdev.git">
+                    <span class="fa fa-github">Repository at GitHub</span></a></li>
+                <li><a  href="#about">
+                    <span class="glyphicon glyphicon-user">About</span></a></li>
+                <li><a  href="#contact">
+                    <span class="glyphicon glyphicon-envelope">Contact</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    </div>
 
-    <h2>Required links</h2>
-    <ul>
-        <li>
-            <a href="project/index.html">Project</a>
-        </li>
-        <li>
-            <a href="assignment/index.html">Assignment</a>
-        </li>
-        <li>
-            <a href="test/index.html">Test MongoDB</a>
-        </li>
-        <li>
-            <a href="https://github.com/JiangtaoXu93/xu-jiangtao-webdev.git">Your public repository at GitHub.com</a>
-        </li>
-    </ul>
+    <div class="homeSection"id="about">
+        <h2 class = "text-center">About Me</h2>
+        <img class="img-circle" src="assignment\uploads\jiangtaoXu.jpg">
+        <blockquote>
+            <p class = "text-center"><em>Hi, I am Jiangtao Xu, a graduate student at Northeastern University, pursuing my Masters in Computer Science.<em></p>
+            <p class = "text-center"><em>I'm glad you're here!<em></p>
+        </blockquote>
+    </div>
+
+    <div class="homeSection" id="contact">
+        <h2 class = "text-center">Contact Me</h2>
+
+        <div class="text-center">
+            <h3><a  href="https://www.instagram.com/tao_hsu">
+                <span class="fa fa-instagram w3-hover-opacity label label-info">Instagram</span>
+            </a></h3>
+            <h3><a  href="https://www.facebook.com/jiangtaoxu93">
+                <span class="fa fa-facebook-official label label-info">Facebook</span>
+            </a></h3>
+            <h3><a  href="https://github.com/JiangtaoXu93/xu-jiangtao-webdev.git">
+                <span class="fa fa-github w3-hover-opacity label label-info">Github</span>
+            </a></h3>
+            <h3><a  href="mailto:xu.ji@husky.neu.edu">
+                <span class="glyphicon glyphicon-envelope w3-hover-opacity label label-info">Email</span>
+            </a></h3>
+        </div>
+
+    </div>
+
+<footer class="text-center to-the-top">
+    <a href="#about"><span class="fa fa-arrow-up"></span>To the top</a>
+</footer>
+
 </body>
 </html>

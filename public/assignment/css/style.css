@@ -35,6 +35,10 @@ body {
     color: #ffffff;
 }
 
+.navbar-default .navbar-nav>li>a {
+    color: #ffffff;
+}
+
 .wd-widget {
     margin-bottom: 10px;
 }
@@ -92,3 +96,22 @@ form.ng-submitted input.ng-invalid {
     border:1px solid #f00;
 }
 
+.body-background{
+    background-color: lightgoldenrodyellow;
+}
+
+.img-circle {
+    border-radius: 50%;
+    width: 25%;
+    display: block;
+    margin: auto;
+}
+
+.homeSection{
+    border: 1px black dotted;
+}
+
+.to-the-top{
+    margin-top: 15px;
+    font-size: x-large;
+}
