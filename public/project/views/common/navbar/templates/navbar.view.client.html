@@ -1,0 +1,68 @@
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <!--<div class="container-fluid">-->
+        <div class="navbar-header">
+
+            <a class="navbar-brand pull-left" href="#!/">
+                <span class="fa fa-home"> SHMC</span>
+            </a>
+
+            <div >
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse pull-right" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a ng-show="model.user._id"
+                           href="" class="dropdown-toggle"
+                           data-toggle="dropdown" role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            <span class="fa  fa-user"> {{model.user.currentRole.toLowerCase()}}</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li ng-if="'BUYER' !== model.user.currentRole && model.user.roles.indexOf('BUYER') > -1 ">
+                                <a ng-click="model1.switchRole('BUYER')" href=""><span class="fa  fa-user"> switch as buyer</span></a>
+                            </li>
+                            <li ng-if="'SELLER' !== model.user.currentRole && model.user.roles.indexOf('SELLER') > -1 ">
+                                <a ng-click="model1.switchRole('SELLER')" href=""><span class="fa  fa-user"> switch as seller</span></a>
+                            </li>
+                            <li ng-if="'ADMIN' !== model.user.currentRole && model.user.roles.indexOf('ADMIN') > -1 ">
+                                <a ng-click="model1.switchRole('SELLER')" href=""><span class="fa  fa-user"> switch as admin</span></a>
+                            </li>
+                            <li ></li>
+                            <li ><a href="#!/profile"><span class="fa  fa-address-card">   profile</span></a></li>
+
+                        </ul>
+                    </li>
+                    <li><a ng-hide="model.user._id" href="#!/login">
+                        <span class="fa  fa-sign-in"> login</span></a></li>
+                    <li><a  ng-hide="model.user._id" href="#!/register">
+                        <span class="fa  fa-user"> register</span></a></li>
+                    <li><a ng-show="model.user._id" ng-click="model1.logout()" href="">
+                        <span class="fa  fa-sign-out"> logout</span></a></li>
+
+                </ul>
+            </div>
+
+
+            <!--<button type="button" class="pull-right" data-toggle="collapse" data-target="#demo"><span class="fa  fa-user">Profile</span></button>-->
+            <!--<div id="demo" class="collapse pull-right">-->
+                <!--<ul class="nav navbar-nav">-->
+                <!--<li><a ng-show="model.user._id" ng-click="model1.logout()" href="">-->
+                        <!--<span class="fa  fa-sign-out">Switch as buyer</span></a></li>-->
+                    <!--<li><a  ng-show="model.user._id" href="#!/profile">-->
+                        <!--<span class="fa  fa-user">Profile</span></a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+
+
+
+
+
+        </div>
+    <!--</div>-->
+</nav>

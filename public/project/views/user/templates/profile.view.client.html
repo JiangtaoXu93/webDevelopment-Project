@@ -1,0 +1,78 @@
+<div ng-include="'views/common/navbar/templates/navbar.view.client.html'" ng-controller="NavbarController as model1"></div>
+<h1>Profile</h1>
+<!--<nav class="navbar navbar-default navbar-fixed-top">-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="navbar-header">-->
+            <!--<a class="navbar-brand" href="">-->
+                <!--Profile-->
+            <!--</a>-->
+            <!--<p class="navbar-text pull-right">-->
+                <!--<a ng-click="model.updateUser(model.userId, model.user)" class="navbar-link">-->
+                    <!--<span class="glyphicon glyphicon-ok"></span>-->
+                <!--</a>-->
+            <!--</p>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
+
+<div ng-show="model.error" class="alert alert-danger">
+    {{model.error}}
+</div>
+
+<div ng-show="model.message" class="alert alert-info">
+    {{model.message}}
+</div>
+
+
+    <div class="container-fluid">
+        <form>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input ng-model="model.user.username"
+                        type="text"
+                        class="form-control"
+                        id="username"
+                        placeholder="User name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email"
+                       ng-model="model.user.email"
+                       class="form-control"
+                       id="email"
+                       placeholder="Enter your Email address">
+            </div>
+            <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input type="text"
+                       ng-model="model.user.firstName"
+                       class="form-control"
+                       id="first-name"
+                       placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text"
+                       ng-model="model.user.lastName"
+                       class="form-control"
+                       id="last-name"
+                       placeholder="Last Name">
+            </div>
+        </form>
+
+        <a ng-click="model.updateUser(model.userId, model.user)"
+           class="btn btn-success btn-block">Update</a>
+        <a ng-if="model.user.currentRole ==='SELLER'" class="btn btn-primary btn-block"
+           href="#!/sellOrder">Sell Order</a>
+        <a ng-if="model.user.currentRole ==='SELLER'" class="btn btn-primary btn-block"
+           href="#!/product/sellOrder">Product Management</a>
+        <a ng-if="model.user.currentRole ==='BUYER'" class="btn btn-primary btn-block"
+           href="#!/buyOrder">Buy Order</a>
+        <a ng-if="model.user.currentRole ==='BUYER'" class="btn btn-primary btn-block"
+           href="#!/wishList">Wish List</a>
+        <a ng-if="model.user.currentRole ==='ADMIN'" class="btn btn-primary btn-block"
+           href="#!/admin">User Management</a>
+        <a ng-click="model.deleteUser(model.user)"
+           class="btn btn-danger btn-block">Unregister</a>
+    </div>
+

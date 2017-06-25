@@ -1,0 +1,37 @@
+<div ng-include="'views/common/navbar/templates/navbar.view.client.html'" ng-controller="NavbarController as model1"></div>
+
+<div class="container-fluid">
+    <div class="background-img container-fluid">
+
+        <h1 class="brandname"><span class="bandname-dark">S</span>econd <span class="bandname-dark">H</span>and <span class="bandname-dark">M</span>arket on <span class="bandname-dark">C</span>ampus</h1>
+
+        <div class="row">
+            <div class="col-md-4">
+                <select class="form-control"
+                        ng-change="model.getUniversitiesByState()"
+                        ng-model="model.selectedState">
+                    <option value="">- Please Choose state-</option>
+                    <option ng-repeat="state in model.states" value="{{state.stateName}}">{{state.stateName}}</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+
+                <select class="form-control"
+                        ng-model="model.selectedUniversity">
+                    <option value="">- Please Choose university-</option>
+                <option ng-repeat="university in model.universities" value={{university._id}}>{{university.name}}</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <a  ng-click="model.universitySearch(model.selectedUniversity)"
+                    class="btn btn-block btn-success ">Enter</a>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!--<img class="background-img" src="imgs\background.jpg">-->
+</div>
