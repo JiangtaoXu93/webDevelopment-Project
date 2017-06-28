@@ -30,7 +30,12 @@
         }
 
         function universitySearch(universityId){
-            $location.url('/search/' + universityId);
+            if (typeof universityId === 'undefined'){
+                $location.url('/search');
+            }else{
+                $location.url('/search/' + universityId);
+            }
+
         }
 
 

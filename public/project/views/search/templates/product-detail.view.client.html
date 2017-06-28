@@ -1,0 +1,44 @@
+<div ng-include="'views/common/navbar/templates/navbar.view.client.html'" ng-controller="NavbarController as model1"></div>
+<div class="container-fluid">
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+    <div class="middle-div">
+        <div><h5><b>TITLE: </b>{{model.item.title}}</h5></div>
+        <img ng-src="{{model.item.galleryURL}}" width="50%"/>
+        <p><b>Description: </b>{{model.item.description}}</p>
+        <p><b>Price: $</b>{{model.item.price}}</p>
+        <p><b>Seller: </b>{{model.item._user.username}}</p>
+        <p><b>Campus: </b>{{model.item._university.name}}</p>
+        <p><b>Create date: </b>{{model.item.dateCreated| date}}</p>
+        <div ng-if="model.item.status === 'sold'">
+            <h3 style="color: red">This product has been sold</h3>
+        </div>
+
+
+        <div ng-if="model.item.status !== 'sold'">
+            <div ng-if="!model.user.currentRole">
+                <a href="" ng-click="model.buy(model.item._id)" class="btn btn-block btn-succes">Buy it!</a>
+                <a href="" ng-click="model.addWishList(model.item._id)" class="btn btn-block btn-succes">Add to wish list</a>
+            </div>
+
+            <div ng-if="model.user.currentRole === 'BUYER' && model.user.currentRole ">
+                <a href="" ng-click="model.buy(model.item._id)" class="btn btn-block btn-succes">Buy it!</a>
+                <a ng-if="model.productIds.indexOf(model.item._id) > -1"
+                   href=""  class="btn btn-block btn-succes">Product already in wish list</a>
+                <a ng-if="model.productIds.indexOf(model.item._id) < 0"
+                   href="" ng-click="model.addWishList(model.item._id)" class="btn btn-block btn-succes">Add to wish list</a>
+            </div>
+
+            <div ng-if="model.user.currentRole !== 'BUYER' && model.user.currentRole ">
+                <a ng-if="model.user.currentRole !== 'BUYER'&& model.user.currentRole"
+                   href="" ng-click="model.switchRole('BUYER')" class="btn btn-block btn-succes">Switch as buyer to buy it!</a>
+                <a ng-if="model.user.currentRole !== 'BUYER' && model.user.currentRole"
+                   href="" ng-click="model.switchRole('BUYER')" class="btn btn-block btn-succes">Switch as buyer to add in wish list</a>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

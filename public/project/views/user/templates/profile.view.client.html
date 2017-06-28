@@ -1,19 +1,5 @@
 <div ng-include="'views/common/navbar/templates/navbar.view.client.html'" ng-controller="NavbarController as model1"></div>
 <h1>Profile</h1>
-<!--<nav class="navbar navbar-default navbar-fixed-top">-->
-    <!--<div class="container-fluid">-->
-        <!--<div class="navbar-header">-->
-            <!--<a class="navbar-brand" href="">-->
-                <!--Profile-->
-            <!--</a>-->
-            <!--<p class="navbar-text pull-right">-->
-                <!--<a ng-click="model.updateUser(model.userId, model.user)" class="navbar-link">-->
-                    <!--<span class="glyphicon glyphicon-ok"></span>-->
-                <!--</a>-->
-            <!--</p>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</nav>-->
 
 <div ng-show="model.error" class="alert alert-danger">
     {{model.error}}
@@ -50,6 +36,7 @@
                        id="first-name"
                        placeholder="First Name">
             </div>
+
             <div class="form-group">
                 <label for="last-name">Last Name</label>
                 <input type="text"
@@ -58,20 +45,43 @@
                        id="last-name"
                        placeholder="Last Name">
             </div>
+
+            <label >State</label>
+                <select class="form-control"
+                        ng-change="model.getUniversitiesByState()"
+                        ng-model="model.selectedState">
+                    <option value="">- Choose state-</option>
+                    <option ng-repeat="state in model.states" value="{{state.stateName}}">{{state.stateName}}</option>
+                </select>
+
+
+            <label >University</label>
+                <select class="form-control"
+                        ng-model="model.user._university">
+                    <option value="">- Choose university-</option>
+                    <option ng-repeat="university in model.universities" value="{{university._id}}">{{university.name}}</option>
+                </select>
+
         </form>
 
         <a ng-click="model.updateUser(model.userId, model.user)"
            class="btn btn-success btn-block">Update</a>
         <a ng-if="model.user.currentRole ==='SELLER'" class="btn btn-primary btn-block"
-           href="#!/sellOrder">Sell Order</a>
+           href="#!/order/sell">Sell Order</a>
         <a ng-if="model.user.currentRole ==='SELLER'" class="btn btn-primary btn-block"
-           href="#!/product/sellOrder">Product Management</a>
+           href="#!/product-management">Product Management</a>
         <a ng-if="model.user.currentRole ==='BUYER'" class="btn btn-primary btn-block"
-           href="#!/buyOrder">Buy Order</a>
+           href="#!/order/buy">Buy Order</a>
         <a ng-if="model.user.currentRole ==='BUYER'" class="btn btn-primary btn-block"
-           href="#!/wishList">Wish List</a>
+           href="#!/wish-list">Wish List</a>
         <a ng-if="model.user.currentRole ==='ADMIN'" class="btn btn-primary btn-block"
-           href="#!/admin">User Management</a>
+           href="#!/admin/user">User Management</a>
+        <a ng-if="model.user.currentRole ==='ADMIN'" class="btn btn-primary btn-block"
+           href="#!/admin/product">Product Management</a>
+        <a ng-if="model.user.currentRole ==='ADMIN'" class="btn btn-primary btn-block"
+           href="#!/admin/wishlist">Wish List Management</a>
+        <a ng-if="model.user.currentRole ==='ADMIN'" class="btn btn-primary btn-block"
+           href="#!/admin/order">Order Management</a>
         <a ng-click="model.deleteUser(model.user)"
            class="btn btn-danger btn-block">Unregister</a>
     </div>

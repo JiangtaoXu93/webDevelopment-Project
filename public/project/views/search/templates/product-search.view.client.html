@@ -1,0 +1,108 @@
+<div ng-include="'views/common/navbar/templates/navbar.view.client.html'" ng-controller="NavbarController as model1"></div>
+<div class="body-background container-fluid">
+    <nav class="navbar navbar-search">
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <select class="form-control"
+                                    ng-change="model.getUniversitiesByState()"
+                                    ng-model="model.selectedState">
+                                <option value="">- Choose state-</option>
+                                <option ng-repeat="state in model.states" value="{{state.stateName}}">{{state.stateName}}</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-3">
+                            <select class="form-control"
+                                    ng-model="model.selectedUniversity">
+                                <option value="">- Choose university-</option>
+                                <option ng-repeat="university in model.universities" value="{{university._id}}">{{university.name}}</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <input class="form-control"
+                                   ng-model="model.keyword"
+                                   placeholder="keyword: e.g. desk">
+                            </input>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <form class="radio-button-form" ng-model="model.searchArea">
+                                <span class="inner-radio-button">
+                                    <input  type="radio" ng-model="model.searchArea" value="campus">
+                                    On Campus
+                                </span>
+                                <span class="inner-radio-button">
+                                    <input  type="radio" ng-model="model.searchArea" value="ebay">
+                                        On Ebay
+                                </span>
+                            </form>
+                        </div>
+
+                        <div class="col-md-2">
+                            <a  ng-click="model.searchProduct()"
+                                class="btn btn-block btn-success ">Search</a>
+                        </div>
+                    </div>
+    </nav>
+
+    <div>
+
+<!------------------------------------------result start---------------------------------------------------------------->
+<!------------------------------------------result start---------------------------------------------------------------->
+        <h3 ng-show="!model.items && !model.campusItems" how>Results</h3>
+        <h3 ng-if="model.campusItems && model.searchArea === 'campus'">Results On Campus</h3>
+        <h3 ng-if="model.items && model.searchArea === 'ebay'">Results On Ebay</h3>
+        <div ng-show="model.error" class="alert alert-danger">
+            {{model.error}}
+        </div>
+
+<!------------------------------------------result on campus start------------------------------------------------------>
+        <div ng-if="model.campusItems&& model.searchArea === 'campus'" class="col-xs-12" id="campusResults">
+            <ul class="list-group">
+                <li ng-click="" ng-repeat="item in model.campusItems"
+                    class="list-group-item">
+                    <div class="row">
+                        <a  href="">
+                            <img href="#!/search/detail/{{item._id}}"
+                                 class="col-md-2"
+                                 ng-src="{{item.galleryURL}}"
+                                 width="60px"/>
+                        </a>
+                        <div class ="col-md-10">
+                            <a  href="#!/search/detail/{{item._id}}"><span>{{item.title}}</span>
+                            </a>
+                            <p>$ {{item.price}}</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+<!------------------------------------------result on campus end---------------------------------------------------------------->
+<!------------------------------------------result on ebay start---------------------------------------------------------------->
+        <div ng-if="model.items&& model.searchArea === 'ebay'&&model.ebayResult" class="col-xs-12" id="ebayResults">
+            <ul class="list-group">
+                <li ng-click="" ng-repeat="item in model.items"
+                    class="list-group-item">
+                    <div class="row">
+                        <a  href="#!/search/detail/ebay/{{item.itemId[0]}}">
+                            <img href=""class="col-md-2"ng-src="{{item.galleryURL[0]}}" width="60px"/>
+                        </a>
+
+                        <div class ="col-md-10">
+                            <a class="" href="#!/search/detail/ebay/{{item.itemId[0]}}"><span>{{item.title[0]}}</span></a>
+                            <p>$ {{item.sellingStatus[0].currentPrice[0]["__value__"]}}</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+<!------------------------------------------result on ebay end---------------------------------------------------------------->
+<!------------------------------------------result end---------------------------------------------------------------->
+<!------------------------------------------result end---------------------------------------------------------------->
+
+    </div>
+</div>
+

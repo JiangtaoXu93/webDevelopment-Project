@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div ng-include="'views/common/navbar/templates/navbar.view.client.html'" ng-controller="NavbarController as model1"></div>
+<div class="container-fluid">
 
-</body>
-</html>
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+    <label for="upLoad">Image of Product</label>
+        <input class="form-control col-xs-10"
+               placeholder="URL of the Image"
+               ng-model="model.galleryURL"
+               id="url"/>
+
+    <form id="upLoad" class = "wd-form" action="/api/upload"   method="post" enctype="multipart/form-data">
+        <input  name="myFile"    type="file" class="form-control"/>
+        <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
+        <input  name="universityId"    value="{{model.universityId}}"   style="display: none"/>
+        <input  name="title"    value="{{model.product.title}}"   style="display: none"/>
+        <input  name="price"    value="{{model.product.price}}"   style="display: none"/>
+        <input  name="description"    value="{{model.product.description}}"   style="display: none"/>
+        <button type="submit"    class="btn btn-block btn-primary">Upload Image</button>
+    </form>
+
+    <label for="name">Title</label>
+    <input class="form-control"
+           placeholder="Title of the Product"
+           ng-model="model.product.title"
+           id="name"/>
+
+    <label for="price">Price</label>
+    <input class="form-control"
+           placeholder="Price of the product"
+           ng-model="model.product.price"
+           id="price"/>
+
+    <label for="description">description</label>
+    <input class="form-control"
+           placeholder="Description of the product"
+           ng-model="model.product.description"
+           id="description"/>
+
+    <input type="submit" ng-click="model.createProduct(model.product,model.galleryURL)" class="btn btn-block btn-success"
+           value="Create"/>
+    <a href="#!/product-management" class="btn btn-block btn-danger">Cancel</a>
+
+
+</div>

@@ -3,11 +3,34 @@
         .module('WebProject')
         .controller('RegisterController', RegisterController);
     
-    function RegisterController($location,currentUser, userService,$rootScope) {
+    function RegisterController($location,currentUser, userService,$rootScope,universityService) {
 
         var model = this;
         model.user = currentUser;
         model.submit = submit;
+        model.getUniversitiesByState = getUniversitiesByState;
+
+        function init() {
+            universityService.findAllStates().then(
+                function (found) {
+                    model.states = found;
+                }
+            );
+        }
+
+        init();
+
+
+        function getUniversitiesByState() {
+            var state = model.selectedState;
+            universityService.findUniversityByStateName(state).then(
+                function (found) {
+                    model.universities = found;
+                }
+            );
+
+        }
+
 
         function submit() {
             return false;
@@ -15,7 +38,7 @@
 
         model.register = register;
 
-        function register(username, password, repassword, email, lastName, firstName) {
+        function register(username, password, repassword, email, lastName, firstName,universityId) {
 
             if(username === null || username === '' || typeof username === 'undefined') {
                 model.error = 'username is required';
@@ -32,6 +55,11 @@
                 // return;
             }
 
+            if(universityId ===''|| typeof universityId ==='undefined'){
+                model.error = "university should not be empty";
+                return;
+            }
+
             userService
                 .findUserByUsername(username)
                 .then(
@@ -44,7 +72,8 @@
                             password: password,
                             email: email,
                             firstName: firstName,
-                            lastName:lastName
+                            lastName:lastName,
+                            _university: universityId
                         };
                         userService
                             .register(newUser)
@@ -58,21 +87,6 @@
                 );
 
 
-            // var found = userService.findUserByUsername(username);
-            //
-            // if(found !== null) {
-            //     model.error = "sorry, that username is taken";
-            // } else {
-            //     var newUser = {
-            //         username: username,
-            //         password: password,
-            //         email: email,
-            //         firstName: firstName,
-            //         lastName:lastName
-            //     };
-            //     newUser = userService.createUser(newUser);
-            //     $location.url('/user/' + newUser._id);
-            // }
         }
     }
 })();

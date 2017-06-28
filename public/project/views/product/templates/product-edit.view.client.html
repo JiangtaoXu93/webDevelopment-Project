@@ -1,0 +1,100 @@
+<div ng-include="'views/common/navbar/templates/navbar.view.client.html'" ng-controller="NavbarController as model1"></div>
+
+<div class="container-fluid">
+
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+    <div ng-show="model.message" class="alert alert-success">
+        {{model.message}}
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 hidden-xs">
+            <ul class="list-group">
+                <li class="list-group-item active">
+                    <div class="row">
+                        <div class="col-md-6 hidden-sm hidden-xs">
+                            Image
+                        </div>
+                        <div class="col-lg-3 visible-lg">
+                            Price
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-xs-11">
+                            Title
+                        </div>
+                        <div class="col-xs-1">
+
+                        </div>
+                    </div>
+                </li>
+                <li ng-repeat="item in model.items" class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-6 hidden-sm hidden-xs">
+                            <a href="">
+                                <img href=""ng-src="{{item.galleryURL}}" width="100px"/></a>
+                            </a>
+                        </div>
+                        <div class="col-lg-3 visible-lg">
+                            {{item.price}}
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-xs-11">
+                            {{item.title}}
+                        </div>
+                        <div class="col-xs-1">
+                            <a href="#!/product/{{item._id}}">
+                                <span class="glyphicon glyphicon-cog pull-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+
+            <label for="upLoad">Image of Product</label>
+            <input class="form-control col-xs-10"
+                   placeholder="URL of the Image"
+                   ng-model="model.productEdit.galleryURL"
+                   id="url"/>
+
+            <form id="upLoad" class = "wd-form" action="/api/upload"   method="post" enctype="multipart/form-data">
+                <input  name="myFile"    type="file" class="form-control"/>
+                <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
+                <input  name="productId"    value="{{model.productId}}"   style="display: none"/>
+                <input  name="universityId"    value="{{model.universityId}}"   style="display: none"/>
+                <input  name="title"    value="{{model.product.title}}"   style="display: none"/>
+                <input  name="price"    value="{{model.product.price}}"   style="display: none"/>
+                <input  name="description"    value="{{model.product.description}}"   style="display: none"/>
+                <button type="submit"    class="btn btn-block btn-primary">Upload Image</button>
+            </form>
+
+            <label for="name">Title</label>
+            <input class="form-control"
+                   placeholder="Title of the Product"
+                   ng-model="model.productEdit.title"
+                   id="name"/>
+
+            <label for="price">Price</label>
+            <input class="form-control"
+                   placeholder="Price of the product"
+                   ng-model="model.productEdit.price"
+                   id="price"/>
+
+            <label for="description">description</label>
+            <input class="form-control"
+                   placeholder="Description of the product"
+                   ng-model="model.productEdit.description"
+                   id="description"/>
+            <a ng-click="model.updateProduct()" class="btn btn-block btn-success">Update</a>
+                <a ng-click="model.deleteProduct(model.productId)" class="btn btn-block btn-danger">Delete</a>
+                <a href="#!/product-management" class="btn btn-block btn-primary">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+

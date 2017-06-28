@@ -7,6 +7,7 @@ var userSchema = mongoose.Schema({
     lastName: String,
     email: String,
     phone: String,
+    _university:{type: mongoose.Schema.Types.ObjectId, ref: "GraduateUniversityModel"},
     currentRole:{type: String, default:"BUYER"},
     roles: [{type: String, enum: ['BUYER', 'SELLER',  'ADMIN']}],
     facebook: {

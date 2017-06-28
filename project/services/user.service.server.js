@@ -17,13 +17,12 @@ passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
 
-
-
 app.get ('/api/user/:userId', findUserById);
 app.get ('/api/user', findAllUsers);
-app.post('/api/user', createUser);
-app.put ('/api/user/:userId', updateUser);
-app.delete ('/api/user/:userId', deleteUser);
+app.post('/api/user',isAdmin, createUser);
+app.put ('/api/user/update', updateUser);
+app.delete ('/api/user/unregister', unregisterUser);
+app.delete ('/api/user/:userId', isAdmin,deleteUser);
 app.post  ('/api/login', passport.authenticate('local'), login);
 app.post  ('/api/logout', logout);
 app.post ('/api/register', register);
@@ -34,6 +33,14 @@ app.get('/auth/facebook/callback',
         successRedirect: '/assignment/#!/profile',
         failureRedirect: '/assignment/#!/login'
     }));
+
+function isAdmin(req, res, next){
+    if(req.isAuthenticated() && req.user.currentRole === 'ADMIN'){
+        next();
+    }else{
+        res.sendStatus(401);
+    }
+}
 
 
 function facebookStrategy(token, refreshToken, profile, done) {
@@ -80,30 +87,15 @@ function loggedin(req, res) {
 }
 
 function register (req, res) {
-    // var user = req.body;
-    // userModel
-    //     .createUser(user)
-    //     .then(
-    //         function(user){
-    //             if(user){
-    //                 req.login(user, function(err) {
-    //                     if(err) {
-    //                         res.status(400).send(err);
-    //                     } else {
-    //                         res.json(user);
-    //                     }
-    //                 });
-    //             }
-    //         }
-    //     );
     var userObj = req.body;
     userObj.roles = ["SELLER","BUYER"];
     userObj.password = bcrypt.hashSync(userObj.password);
+    console.log(userObj);
     userModel
         .createUser(userObj)
         .then(function (user) {
-            req
-                .login(user, function (status) {
+            console.log(user);
+            req.login(user, function (status) {
                     res.send(status);
                 });
         });
@@ -140,24 +132,10 @@ function deserializeUser(user, done) {
 
 
 function localStrategy(username, password, done) {
-    // userModel
-    //     .findUserByCredentials(username,password)
-    //     .then(function (user) {
-    //         if(user) {
-    //             done(null, user);
-    //         } else {
-    //             done(null, false);
-    //         }
-    //     }, function (error) {
-    //         done(error, false);
-    //     });
 
     userModel
         .findUserByUsername(username)
         .then(function (user) {
-
-
-           // / var check = bcrypt.compareSync(password, user.password);
             if(user && bcrypt.compareSync(password, user.password)) {
                 return done(null, user);
             } else {
@@ -169,6 +147,21 @@ function localStrategy(username, password, done) {
         });
 }
 
+function unregisterUser(req, res) {
+    if(req.isAuthenticated){
+        var userId = req.user._id;
+        userModel
+            .deleteUser(userId)
+            .then(function (status) {
+                res.send(status);
+            });
+    }else{
+        res.sendStatus(401);
+    }
+}
+
+
+
 function deleteUser(req, res) {
     var userId = req.params.userId;
     userModel
@@ -178,10 +171,12 @@ function deleteUser(req, res) {
         });
 }
 
+
+
 function updateUser(req, res) {
     var user = req.body;
     userModel
-        .updateUser(req.params.userId, user)
+        .updateUser(user._id, user)
         .then(function (status) {
             res.send(status);
         });
@@ -190,7 +185,6 @@ function updateUser(req, res) {
 function createUser(req, res) {
     var user = req.body;
     user.password = bcrypt.hashSync(user.password);
-
     userModel
         .createUser(user)
         .then(function (user) {
@@ -206,6 +200,8 @@ function findUserById(req, res) {
         .findUserById(userId)
         .then(function (user) {
             res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
         });
 }
 

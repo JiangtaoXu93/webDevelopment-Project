@@ -7,11 +7,13 @@
 
         var api = {
             createUser: createUser,
+            findAllUsers:findAllUsers,
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
-            deleteUser: deleteUser,
+            deleteUser:deleteUser,
+            unregister: unregister,
             login: login,
             logout: logout,
             register: register,
@@ -25,6 +27,14 @@
                 return response.data;
             });
         }
+
+        function unregister() {
+            return $http.delete("/api/user/unregister")
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
 
 
         function login(username, password) {
@@ -54,12 +64,30 @@
                     return response.data;
                 });
         }
+        
+        function findAllUsers() {
+            var url = "/api/user/";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
         function createUser(user) {
 
             var url = "/api/user";
             return $http.post(url, user)
                 .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function deleteUser(userId) {
+            var url = "/api/user/" + userId;
+            return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                },function (response) {
                     return response.data;
                 });
         }
@@ -78,6 +106,8 @@
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
+                },function (response) {
+                    return response.data;
                 });
 
 
@@ -94,12 +124,11 @@
         }
 
         function updateUser(userId, user){
-            var url = "/api/user/"+userId;
+            var url = "/api/user/update";
             return $http.put(url, user)
                 .then(function (response) {
                     return response.data;
                 });
-
 
         }
 

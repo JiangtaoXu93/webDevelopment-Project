@@ -1,0 +1,170 @@
+<div ng-include="'views/common/navbar/templates/navbar.view.client.html'" ng-controller="NavbarController as model1"></div>
+
+<div class="container-fluid">
+    <h4>Product Management</h4>
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+
+<!-------------------------------update product div : start--------------------------------------------------------------->
+
+    <nav ng-show="model.itemUpdate" class="navbar navbar-search">
+        <div class="row">
+
+            <div class="col-md-3">
+                <input class="form-control"
+                       ng-model="model.itemUpdate.galleryURL"
+                       placeholder="Product image url"/>
+            </div>
+
+            <div class="col-md-2">
+                <input class="form-control"
+                       ng-model="model.itemUpdate.title"
+                       placeholder="title: e.g. desk"/>
+            </div>
+
+            <div class="col-md-2">
+                <select class="form-control"
+                        ng-change="model.getUniversitiesByState()"
+                        ng-model="model.selectedState">
+                    <option value="">- Choose state-</option>
+                    <option ng-repeat="state in model.states" value="{{state.stateName}}">{{state.stateName}}</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <select class="form-control"
+                        ng-model="model.selectedUniversity">
+                    <option value="">- Choose university-</option>
+                    <option ng-repeat="university in model.universities" value="{{university._id}}">{{university.name}}</option>
+                </select>
+            </div>
+
+
+            <div class="col-md-2">
+                <input class="form-control"
+                       ng-model="model.itemUpdate.price"
+                       placeholder="Price of product">
+            </div>
+        </div>
+
+        <div class="inner-click-button">
+            <a  ng-click="model.updateProduct(model.itemUpdate)"
+                class="btn btn-block btn-success ">Update</a>
+        </div>
+    </nav>
+
+<!-------------------------------update product div : end------------------------------------------------------------>
+
+<!-------------------------------add product div : start--------------------------------------------------------------->
+
+    <nav ng-show="model.addDiv" class="navbar navbar-search">
+        <div class="row">
+            <div class="col-md-3">
+                <input class="form-control"
+                       ng-model="model.newProduct.galleryURL"
+                       placeholder="Image url: e.g. http://www.ikea.com/gb/en/images/products/brusali-desk-brown__0383188_pe557807_s5.jpg">
+            </div>
+
+            <div class="col-md-2">
+                <input class="form-control"
+                       ng-model="model.newProduct.title"
+                       placeholder="title: e.g. desk">
+            </div>
+
+            <div class="col-md-2">
+                <select class="form-control"
+                        ng-change="model.getUniversitiesByState()"
+                        ng-model="model.selectedState">
+                    <option value="">- Choose state-</option>
+                    <option ng-repeat="state in model.states" value="{{state.stateName}}">{{state.stateName}}</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+
+                <select class="form-control"
+                        ng-model="model.selectedUniversity">
+                    <option value="">- Choose university-</option>
+                    <option ng-repeat="university in model.universities" value="{{university._id}}">{{university.name}}</option>
+                </select>
+
+            </div>
+
+            <div class="col-md-2">
+                <input class="form-control"
+                       ng-model="model.newProduct.price"
+                       placeholder="Price of product">
+            </div>
+        </div>
+
+        <div class="inner-click-button">
+            <a  ng-click="model.createProduct()"
+                class="btn btn-block btn-success ">Create</a>
+        </div>
+    </nav>
+
+<!-------------------------------add product div : end--------------------------------------------------------------->
+
+    <ul  class="list-group">
+
+        <li  class="list-group-item active">
+            <div class="row">
+                <div class="col-xs-5 col-md-2" >
+                    Image
+                </div>
+                <div class="col-xs-3 col-md-2 ">
+                    Title
+                </div>
+                <div class="col-md-2  visible-md">
+                    Created Date
+                </div>
+                <div class="col-md-2  visible-md" >
+                    User
+                </div>
+                <div class="col-md-2  visible-md" >
+                    Price
+                </div>
+                <div class="col-xs-4 col-md-2  pull-right">
+                    <a href="" ng-click="model.addDiv = 'add'" >
+                        <span class="glyphicon glyphicon-plus pull-right pd-add"></span>
+                    </a>
+                </div>
+
+            </div>
+        </li>
+
+        <li ng-repeat="item in model.items" class="list-group-item">
+            <div class="row">
+                <div class="col-xs-5 col-md-2" >
+                    <img href=""ng-src="{{item.galleryURL}}" width="100px"/>
+                </div>
+
+                <div class="col-xs-3 col-md-2">
+                    {{item.title}}</a>
+                </div>
+                <div class="col-md-2  visible-md">
+                    {{item.dateCreated | date}}
+                </div>
+                <div class="col-md-2  visible-md" >
+                    {{item._user.username}}
+                </div>
+                <div class="col-md-2  visible-md" >
+                    $ {{item.price}}
+                </div>
+                <div class="col-xs-4 col-md-2">
+                    <a href="" ng-click = "model.showUpdate(item)">
+                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                    </a>
+                    <a href=""  ng-click = "model.deleteProduct(item._id)">
+                        <span class="glyphicon glyphicon-trash pull-right"></span>
+                    </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+
+
+</div>

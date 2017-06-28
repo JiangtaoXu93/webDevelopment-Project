@@ -1,0 +1,28 @@
+<div ng-include="'views/common/navbar/templates/navbar.view.client.html'" ng-controller="NavbarController as model1"></div>
+<div class="container-fluid">
+
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+    <nav  class="navbar navbar-search">
+        <div class="middle-div">
+            <div><h5><b>TITLE: </b>{{model.item.Title}}</h5></div>
+            <img ng-src="{{model.item.GalleryURL}}" width="50%"/>
+            <p><b>Price: </b>{{model.item.ConvertedCurrentPrice.CurrencyID}}: {{model.item.ConvertedCurrentPrice.Value}}</p>
+
+            <div ng-repeat="nameValue in model.item.ItemSpecifics.NameValueList" >
+                <p><b>{{nameValue.Name}}:  </b>{{nameValue.Value[0]}}</p>
+            </div>
+
+        </div>
+
+        <div class="inner-click-button">
+            <a  href={{model.item.ViewItemURLForNaturalSearch}}
+                class="btn btn-block btn-success ">Go to Ebay</a>
+        </div>
+    </nav>
+
+
+
+</div>

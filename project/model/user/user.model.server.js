@@ -11,33 +11,11 @@ userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 userModel.findUserByFacebookId =findUserByFacebookId;
 
-userModel.addWebsite = addWebsite;
-userModel.deleteWebsite = deleteWebsite;
 
 module.exports = userModel;
 
 function findUserByFacebookId(facebookId) {
     return userModel.findOne({'facebook.id': facebookId});
-}
-
-
-function deleteWebsite(userId, websiteId) {
-    return userModel
-        .findById(userId)
-        .then(function (user) {
-            var index = user.websites.indexOf(websiteId);
-            user.websites.splice(index, 1);
-            return user.save();
-        });
-}
-
-function addWebsite(userId, websiteId) {
-    return userModel
-        .findById(userId)
-        .then(function (user) {
-            user.websites.push(websiteId);
-            return user.save();
-        });
 }
 
 function createUser(user) {
@@ -49,7 +27,9 @@ function findUserById(userId) {
 }
 
 function findAllUsers() {
-    return userModel.find();
+    return userModel.find()
+        .populate("_university")
+        .exec();
 }
 
 function findUserByUsername(username) {
@@ -61,7 +41,6 @@ function findUserByCredentials(username, password) {
 }
 
 function updateUser(userId, newUser) {
-    delete newUser.username;
     delete newUser.password;
     return userModel.update({_id: userId}, {$set: newUser});
 }

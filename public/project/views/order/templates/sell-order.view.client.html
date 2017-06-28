@@ -1,10 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div ng-include="'views/common/navbar/templates/navbar.view.client.html'" ng-controller="NavbarController as model1"></div>
 
-</body>
-</html>
+<div class="container-fluid">
+
+    <form class="radio-button-form" ng-model="model.searchArea">
+        <span class="inner-radio-button">
+            <input   type="radio" ng-model="model.searchArea" value="order">Sell Order</span>
+        <span class="inner-radio-button">
+            <input  type="radio" ng-model="model.searchArea" value="buyer">Buyer List</span>
+    </form>
+    <ul ng-if="model.searchArea === 'order'"  class="list-group">
+
+        <li  class="list-group-item active">
+            <div class="row">
+                <div class="col-xs-6 col-md-3" >
+                    Image
+                </div>
+                <div class="col-xs-5 col-md-2 ">
+                    Title
+                </div>
+                <div class="col-md-3  visible-md">
+                    Buyer
+                </div>
+                <div class="col-md-3  visible-md" >
+                    Sold Time
+                </div>
+                <div class="col-xs-1 pull-right">
+
+                </div>
+
+            </div>
+        </li>
+
+        <li ng-repeat="item in model.items" class="list-group-item">
+            <div class="row">
+                <div class="col-xs-6 col-md-3" >
+                    <img href=""ng-src="{{item._product.galleryURL}}" width="100px"/></a>
+                </div>
+                <div class="col-xs-5 col-md-2">
+                    {{item._product.title}}
+                </div>
+                <div class="col-md-3  visible-md">
+                    {{item._seller.username}}
+                </div>
+                <div class="col-md-3  visible-md" >
+                    {{item.dateCreated |date : 'yyyy-MM-dd HH:mm:ss'}}
+                </div>
+                <div class="col-xs-1">
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <ul ng-if="model.searchArea === 'buyer'"  class="list-group">
+
+        <li  class="list-group-item active">
+            <div class="row">
+                <div class="col-xs-6 col-md-3" >
+                    Who Bought
+                </div>
+                <div class="col-xs-5 col-md-2 ">
+                    Sold Time
+                </div>
+                <div class="col-md-3  visible-md">
+                    Email
+                </div>
+                <div class="col-md-3  visible-md" >
+                    University
+                </div>
+                <div class="col-xs-1 pull-right">
+
+                </div>
+
+            </div>
+        </li>
+
+        <li ng-repeat="item in model.items" class="list-group-item">
+            <div class="row">
+                <div class="col-xs-6 col-md-3" >
+                    {{item._seller.username}}
+                </div>
+                <div class="col-xs-5 col-md-2">
+                    {{item.dateCreated |date : 'yyyy-MM-dd HH:mm:ss'}}
+                </div>
+                <div class="col-md-3  visible-md">
+                    {{item._seller.email}}
+                </div>
+                <div class="col-md-3  visible-md" >
+                    {{item._university.name}}
+                </div>
+                <div class="col-xs-1">
+                </div>
+            </div>
+        </li>
+
+
+
+
+
+    </ul>
+
+
+</div>

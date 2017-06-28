@@ -1,0 +1,182 @@
+<div ng-include="'views/common/navbar/templates/navbar.view.client.html'" ng-controller="NavbarController as model1"></div>
+
+<div class="container-fluid">
+    <h4>Order Management</h4>
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+
+<!-------------------------------update order div : start--------------------------------------------------------------->
+
+    <nav ng-show="model.itemUpdate" class="navbar navbar-search">
+        <div class="row">
+
+            <div class="col-md-2">
+                <label>Product Id:</label>
+                <input class="form-control"
+                       ng-model="model.itemUpdate._product._id"
+                       placeholder="Product Id"/>
+            </div>
+
+
+            <div class="col-md-2">
+                <label>Buyer Id:</label>
+                <input class="form-control"
+                       ng-model="model.itemUpdate._buyer._id"
+                       placeholder="Buyer Id"/>
+            </div>
+
+
+            <div class="col-md-2">
+                <label>Seller Id:</label>
+                <input class="form-control"
+                       ng-model="model.itemUpdate._seller._id"
+                       placeholder="Seller Id"/>
+            </div>
+
+
+            <div class="col-md-2">
+                <label>State:</label>
+                <select class="form-control"
+                        ng-change="model.getUniversitiesByState()"
+                        ng-model="model.selectedState">
+                    <option value="">- Choose state-</option>
+                    <option ng-repeat="state in model.states" value="{{state.stateName}}">{{state.stateName}}</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label>University:</label>
+                <select class="form-control"
+                        ng-model="model.selectedUniversity">
+                    <option value="">- Choose university-</option>
+                    <option ng-repeat="university in model.universities" value="{{university._id}}">{{university.name}}</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="inner-click-button">
+            <a  ng-click="model.updateOrder(model.itemUpdate)"
+                class="btn btn-block btn-success ">Update</a>
+        </div>
+    </nav>
+
+<!-------------------------------update order div : end------------------------------------------------------------>
+
+<!-------------------------------add order div : start--------------------------------------------------------------->
+
+    <nav ng-show="model.addDiv" class="navbar navbar-search">
+        <div class="row">
+            <div class="col-md-2">
+                <label>Product Id:</label>
+                <input class="form-control"
+                       ng-model="model.newOrder._product"
+                       placeholder="Product Id">
+            </div>
+
+            <div class="col-md-2">
+                <label>Buyer Id:</label>
+                <input class="form-control"
+                       ng-model="model.newOrder._buyer"
+                       placeholder="Buyer Id">
+            </div>
+
+            <div class="col-md-2">
+                <label>Seller Id:</label>
+                <input class="form-control"
+                       ng-model="model.newOrder._seller"
+                       placeholder="Seller Id">
+            </div>
+
+            <div class="col-md-2">
+                <label>State:</label>
+                <select class="form-control"
+                        ng-change="model.getUniversitiesByState()"
+                        ng-model="model.selectedState">
+                    <option value="">- Choose state-</option>
+                    <option ng-repeat="state in model.states" value="{{state.stateName}}">{{state.stateName}}</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label>University:</label>
+                <select class="form-control"
+                        ng-model="model.selectedUniversity">
+                    <option value="">- Choose university-</option>
+                    <option ng-repeat="university in model.universities" value="{{university._id}}">{{university.name}}</option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="inner-click-button">
+            <a  ng-click="model.createOrder()"
+                class="btn btn-block btn-success ">Create</a>
+        </div>
+    </nav>
+
+<!-------------------------------add order div : end------------------------------------------------------------------->
+
+    <ul  class="list-group">
+
+        <li  class="list-group-item active">
+            <div class="row">
+                <div class="col-xs-3 col-md-3" >
+                    Image
+                </div>
+                <div class="col-xs-2 visible-md ">
+                    Title
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    User
+                </div>
+                <div class="col-md-2 col-xs-3">
+                    Buyer
+                </div>
+                <div class="col-md-2  visible-md" >
+                    Created Date
+                </div>
+                <div class="col-xs-3  pull-right">
+                    <a href="" ng-click="model.addDiv = 'add'" >
+                        <span class="glyphicon glyphicon-plus pull-right pd-add"></span>
+                    </a>
+                </div>
+            </div>
+        </li>
+
+
+        <li ng-repeat="item in model.items" class="list-group-item">
+            <div class="row">
+                <div class="col-md-3 visible-md" >
+                    <img href=""ng-src="{{item._product.galleryURL}}" width="100px"/>
+                </div>
+
+                <div class="col-xs-3 col-md-2">
+                    {{item._product.title}}
+                </div>
+                <div class="col-xs-3 col-md-2">
+                    {{item._buyer.username}}
+                </div>
+                <div class="col-xs-3 col-md-2" >
+                    {{item._seller.username}}
+                </div>
+                <div class="col-md-2  visible-md" >
+                    {{item.dateCreated | date : 'yyyy-MM-dd HH:mm:ss'}}
+                </div>
+                <div class="col-xs-3 col-md-1">
+                    <a href="" ng-click = "model.showUpdate(item)">
+                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                    </a>
+                    <a href=""  ng-click = "model.deleteOrder(item._id)">
+                        <span class="glyphicon glyphicon-trash pull-right"></span>
+                    </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+
+
+</div>

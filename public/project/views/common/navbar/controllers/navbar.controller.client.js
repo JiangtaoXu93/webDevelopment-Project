@@ -3,17 +3,52 @@
         .module('WebProject')
         .controller('NavbarController', NavbarController);
 
-    function NavbarController($route ,$location, userService, $q) {
+    function NavbarController($route ,$location, $window, userService, $q) {
         var model = this;
         model.logout=logout;
         model.switchRole=switchRole;
+        model.backPage = backPage;
+
+        function init() {
+            var url = $location.url();
+            if(url ==='/'){
+                model.homePage = "homePage";
+            }
+            getCurrentUser();
+        }
+        init();
+
+        function backPage() {
+            var url = $location.url();
+            var sections = url.split('/');
+            if (sections[1] === 'search' && sections[2] === 'detail'){
+                $location.url("/search");
+            }else if (sections[1] === 'search'){
+                $location.url("/");
+            }else if(sections[1] === 'login'){
+                $location.url("/");
+            }else if(sections[1] === 'register'){
+                $location.url("/");
+            }else if(sections[1] === 'profile'){
+                $location.url("/");
+            }else if(sections[1] === 'product-management'){
+                $location.url("/profile");
+            }else if (sections[1] === 'product'){
+                $location.url("/product-management");
+            }else if (sections[1] === 'order'){
+                $location.url("/profile");
+            }else if (sections[1] === 'wish-list'&& sections[2] === 'detail'){
+                $location.url("/wish-list");
+            }else if (sections[1] === 'wish-list'){
+                $location.url("/profile");
+            }else if (sections[1] === 'admin'){
+                $location.url("/profile");
+            }
 
 
-        // var result=getCurrentUser();
-        // model.user= result;
-        getCurrentUser();
+        }
+
         function logout() {
-            console.log("logout");
             userService
                 .logout()
                 .then(
@@ -31,9 +66,7 @@
                 .updateUser(model.user._id, model.user)
                 .then(function () {
                     $route.reload();
-                   console.log("User update was successful");
-                })
-            // $location.url("/");
+                });
 
         }
 

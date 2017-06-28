@@ -3,7 +3,7 @@
         .module('WebProject')
         .controller('LoginController', LoginController);
     
-    function LoginController($location,currentUser, userService,$timeout) {
+    function LoginController($location,currentUser, userService,$timeout, $window) {
 
         var model = this;
 
@@ -37,7 +37,8 @@
                 userService
                     .login(username, password)
                     .then(function (found) {
-                        $location.url('/');
+                        $window.history.back()
+                        // $location.url('/');
                     },function(){
                         model.message = "sorry, username " + username + " and password are not found. please try again!";
                         $timeout(function() {

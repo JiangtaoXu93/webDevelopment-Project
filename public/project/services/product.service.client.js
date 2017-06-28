@@ -8,22 +8,25 @@
         var api = {
             createProduct: createProduct,
             findProductById: findProductById,
-            findProductByStateName: findProductByStateName,
+            findProductByUser: findProductByUser,
             updateProduct: updateProduct,
             deleteProduct: deleteProduct,
-            findAllStates:findAllStates,
-            findProductOnEbay:findProductOnEbay
+            findAllProducts: findAllProducts,
+            findProductByUniversityId:findProductByUniversityId,
+            findProductOnEbay:findProductOnEbay,
+            findProductOnCampus:findProductOnCampus,
+            findProductDetailById:findProductDetailById,
+            findProductEbayDetailById:findProductEbayDetailById
         };
         return api;
 
-        function findAllStates() {
-            var url="/api/states";
+        function findAllProducts() {
+            var url="/api/products";
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
                 });
         }
-
 
 
 
@@ -36,23 +39,39 @@
                 });
         }
 
-        function findProductByStateName(stateName) {
-            var url = "/api/product?stateName="+stateName;
-            return $http.get(url)
-                .then(function (response) {
-                    return response.data;
-                });
-
-        }
 
         function findProductById(productId) {
             var url = "/api/product/"+productId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
+                },function (response) {
+                    return response.data;
                 });
+        }
 
+        function findProductDetailById(productId) {
+            var url = "/api/product/detail/"+productId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
+        function findProductByUser(userId){
+            var url = "/api/products?userId=" + userId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function findProductByUniversityId(universityId){
+            var url = "/api/products?universityId=" + universityId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
         }
 
 
@@ -74,6 +93,32 @@
                 });
 
         }
+
+        function findProductOnCampus(keyword,universityId) {
+            var url="/api/search?keyword=" + keyword +"&universityId=" + universityId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function findProductEbayDetailById(itemId) {
+            var url = "http://open.api.ebay.com/shopping?callname=GetSingleItem&responseencoding=JSON&appid=Jiangtao-Webdev-PRD-77a8f702d-1a6a9d14&"
+                +"siteid=0&"
+                +"version=967&"
+                +"IncludeSelector=Description,ItemSpecifics,ShippingCosts&"
+                +"ItemID="+itemId
+                +"&callbackname=thisIsMyCallBack";
+
+
+
+            return Promise.resolve( $.ajax({
+                url: url,
+                dataType:"jsonp",
+                jsonpCallback: 'thisIsMyCallBack'
+            }));
+        }
+
 
         function findProductOnEbay(keyword) {
             var url = "https://svcs.ebay.com/services/search/FindingService/v1";

@@ -29,6 +29,25 @@
                    id="last-name"
                    placeholder="Wall">
 
+            <label for="state">State</label>
+            <select class="form-control"
+                    id="state"
+                    ng-change="model.getUniversitiesByState()"
+                    ng-model="model.selectedState">
+                <option value="">- Choose state-</option>
+                <option ng-repeat="state in model.states" value="{{state.stateName}}">{{state.stateName}}</option>
+            </select>
+
+
+            <label for="university">University</label>
+            <select class="form-control"
+                    id="university"
+                    ng-model="model.selectedUniversity"
+                    required>
+                <option value="">- Choose university-</option>
+                <option ng-repeat="university in model.universities" value="{{university._id}}">{{university.name}}</option>
+            </select>
+
 
             <label for="email">Email address</label>
             <input type="email"
@@ -51,7 +70,7 @@
                    class="form-control"
                    placeholder="Re-enter your password"
                    required/>
-            <input type="submit" ng-click="model.register(username, password, repassword, email, firstName, lastName)"
+            <input type="submit" ng-click="model.register(username, password, repassword, email, firstName, lastName,model.selectedUniversity)"
                class="btn btn-primary btn-block" value="Register"/>
             <a class="btn btn-danger  btn-block"
                href="#!/">Cancel</a>

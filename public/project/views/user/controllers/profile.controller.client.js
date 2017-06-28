@@ -3,22 +3,49 @@
         .module('WebProject')
         .controller('ProfileController', ProfileController);
     
-    function ProfileController($location, currentUser, $timeout, $routeParams, userService) {
+    function ProfileController($location, currentUser, $timeout, $routeParams, userService,universityService) {
 
         var model = this;
 
         model.userId = currentUser._id;
         model.user = currentUser;
+        model.universityId = model.user._university;
+        model.getUniversitiesByState = getUniversitiesByState;
         model.deleteUser = deleteUser;
+        model.updateUser = updateUser;
         model.logout = logout;
         var initialUserName;
 
-        //model.user = userService.findUserById(model.userId);
+        function init() {
+            renderUser(currentUser);
+            initialUserName = currentUser.username;
+            universityService.findAllStates().then(
+                function (found) {
+                    model.states = found;
+                }
+            );
 
-        model.updateUser = updateUser;
-        //function
-
+            universityService.findUniversityById(model.universityId).then(
+                function (found) {
+                    model.selectedState=found.stateName;
+                    model.user._university = found._id;
+                    model.searchArea = "campus"
+                    getUniversitiesByState();
+                }
+            )
+        }
         init();
+
+        function getUniversitiesByState() {
+            var state = model.selectedState;
+            universityService.findUniversityByStateName(state).then(
+                function (found) {
+                    model.universities = found;
+                }
+            );
+
+        }
+
 
         function updateUser(uid, u){
             if (model.user.username !== initialUserName){
@@ -67,10 +94,7 @@
             }, 3000)
         }
 
-        function init() {
-            renderUser(currentUser);
-        }
-        init();
+
 
         function renderUser (user) {
             model.user = user;
@@ -83,7 +107,7 @@
 
         function deleteUser(user) {
             userService
-                .deleteUser(user._id)
+                .unregister()
                 .then(function () {
                     $location.url('/');
                 }, function () {
