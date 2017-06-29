@@ -3,7 +3,7 @@ var wishlistModel = require('../model/wishlist/wishlist.model.server');
 app.get ('/api/wishlist/:wishlistId', findWishlistById);
 app.get ('/api/wishlists', isAdmin,findAllWishlists);
 app.get('/api/wishlist',isBuyerAdmin,findWishlistByBuyerId);
-app.post('/api/wishlist', isAdmin, createWishlist);
+app.post('/api/wishlist',  createWishlist);
 app.put ('/api/wishlist/:wishlistId',isAdmin, updateWishlist);
 app.delete ('/api/wishlist/:wishlistId', isAdmin,deleteWishlist);
 app.put ('/api/wishlist/:wishlistId/product/:productId/add',isBuyerAdmin, addProductToUser);

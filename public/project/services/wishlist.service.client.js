@@ -35,7 +35,6 @@
         }
 
         function createWishlist(wishlist) {
-
             var url = "/api/wishlist";
             return $http.post(url, wishlist)
                 .then(function (response) {

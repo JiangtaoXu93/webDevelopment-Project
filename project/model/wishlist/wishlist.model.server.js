@@ -34,10 +34,10 @@ function removeProductFromUser(productId, wishlistId) {
 }
 
 function createWishlist(wishlist) {
-    return wishlistModel.create(wishlist)
-        .then(function () {
-            return productModel.updateProductStatus(wishlist._product);
-        });
+    return wishlistModel.create(wishlist);
+        // .then(function () {
+        //     return productModel.updateProductStatus(wishlist._product);
+        // });
 }
 
 function findWishlistById(wishlistId) {

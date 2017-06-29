@@ -90,11 +90,9 @@ function register (req, res) {
     var userObj = req.body;
     userObj.roles = ["SELLER","BUYER"];
     userObj.password = bcrypt.hashSync(userObj.password);
-    console.log(userObj);
     userModel
         .createUser(userObj)
         .then(function (user) {
-            console.log(user);
             req.login(user, function (status) {
                     res.send(status);
                 });
@@ -142,7 +140,6 @@ function localStrategy(username, password, done) {
                 return done(null, false);
             }
         },function (error) {
-            console.log(error);
             return done(error, false);
         });
 }
