@@ -5,29 +5,26 @@
     <div ng-show="model.error" class="alert alert-danger">
         {{model.error}}
     </div>
-
+<!-------------------------------update user div : start--------------------------------------------------------------->
     <nav ng-show="model.itemUpdate" class="navbar navbar-search">
-
         <div class="row">
 
             <div class="col-md-2">
-
+                <label>Username</label>
                 <input class="form-control"
                        ng-model="model.itemUpdate.username"
                        placeholder="username: e.g. Jack"/>
-
             </div>
 
             <div class="col-md-2">
-
+                <label>Email</label>
                 <input class="form-control"
                        ng-model="model.itemUpdate.email"
                        placeholder="email: e.g. Jack@gmail.com"/>
-
-
             </div>
 
             <div class="col-md-2">
+                <label>State</label>
                 <select class="form-control"
                         ng-change="model.getUniversitiesByState()"
                         ng-model="model.selectedState">
@@ -37,24 +34,23 @@
             </div>
 
             <div class="col-md-3">
-
+                <label>University</label>
                 <select class="form-control"
                         ng-model="model.selectedUniversity">
                     <option value="">- Choose university-</option>
                     <option ng-repeat="university in model.universities" value="{{university._id}}">{{university.name}}</option>
                 </select>
-
             </div>
 
 
             <div class="col-md-3">
-
+                <label>Roles</label>
                 <form class="radio-button-form">
-                                <span class="inner-checkbox-button">
-                                    <input  type="checkbox"
-                                            ng-checked="model.itemUpdate.roles.indexOf('BUYER')>-1"
-                                            ng-model="model.newRolesBuyer"
-                                            ng-true-value="'BUYER'" ng-false-value="">
+                    <span class="inner-checkbox-button">
+                        <input  type="checkbox"
+                                ng-checked="model.itemUpdate.roles.indexOf('BUYER')>-1"
+                                ng-model="model.newRolesBuyer"
+                                ng-true-value="'BUYER'" ng-false-value="">
                                     BUYER
                                 </span>
                     <span class="inner-checkbox-button">
@@ -80,31 +76,35 @@
             <a  ng-click="model.updateUser(model.itemUpdate)"
                 class="btn btn-block btn-success ">Update</a>
         </div>
+        <div class="inner-click-button">
+            <a  ng-click="model.itemUpdate=''"
+                class="btn btn-block btn-danger ">Cancel</a>
+        </div>
     </nav>
+<!-------------------------------update user div : end--------------------------------------------------------------->
+<!-------------------------------add user div : start--------------------------------------------------------------->
 
     <nav ng-show="model.addDiv" class="navbar navbar-search">
-
         <div class="row">
 
             <div class="col-md-2">
-
+                <label>Username</label>
                 <input class="form-control"
                        ng-model="model.newUser.username"
                        placeholder="username: e.g. Jack">
                 </input>
-
             </div>
 
             <div class="col-md-2">
-
+                <label>Password</label>
                 <input class="form-control"
                        ng-model="model.newUser.password"
                        placeholder="password: e.g. 123qwe">
                 </input>
-
             </div>
 
             <div class="col-md-2">
+                <label>State</label>
                 <select class="form-control"
                         ng-change="model.getUniversitiesByState()"
                         ng-model="model.selectedState">
@@ -114,7 +114,7 @@
             </div>
 
             <div class="col-md-3">
-
+                <label>University</label>
                 <select class="form-control"
                         ng-model="model.selectedUniversity">
                     <option value="">- Choose university-</option>
@@ -125,7 +125,7 @@
 
 
             <div class="col-md-3">
-
+                <label>Roles</label>
                 <form class="radio-button-form">
                                 <span class="inner-checkbox-button">
                                     <input  type="checkbox" ng-model="model.newRoles.buyer" value="BUYER">
@@ -148,8 +148,13 @@
             <a  ng-click="model.createUser()"
                 class="btn btn-block btn-success ">Create</a>
         </div>
-    </nav>
 
+        <div class="inner-click-button">
+            <a  ng-click="model.addDiv=''"
+                class="btn btn-block btn-danger ">Cancel</a>
+        </div>
+    </nav>
+<!-------------------------------add user div : end--------------------------------------------------------------->
 
     <ul  class="list-group">
 
