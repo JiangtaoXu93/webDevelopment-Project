@@ -30,8 +30,8 @@ app.get ('/api/loggedin', loggedin);
 app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect: '/assignment/#!/profile',
-        failureRedirect: '/assignment/#!/login'
+        successRedirect: '/project/#!/profile',
+        failureRedirect: '/project/#!/login'
     }));
 
 function isAdmin(req, res, next){
