@@ -23,22 +23,23 @@
                 }
             );
 
-            universityService.findUniversityById(model.universityId).then(
-                function (found) {
-                    model.selectedState=found.stateName;
-                    model.selectedUniversity = found._id;
-                    model.searchArea = "campus"
-                    getUniversitiesByState();
-                }
-            );
+            if (typeof model.universityId !== 'undefined'){
+                universityService.findUniversityById(model.universityId).then(
+                    function (found) {
+                        model.selectedState=found.stateName;
+                        model.selectedUniversity = found._id;
+                        model.searchArea = "campus"
+                        getUniversitiesByState();
+                    }
+                );
 
-            if(typeof $routeParams.universityId !== 'undefined'){
                 productService.findProductByUniversityId($routeParams.universityId)
                     .then(function (found) {
                         model.campusItems = found;
                     })
 
             }
+            
         }
 
         init();
