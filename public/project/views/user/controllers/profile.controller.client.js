@@ -25,14 +25,16 @@
                 }
             );
 
-            universityService.findUniversityById(model.universityId).then(
-                function (found) {
-                    model.selectedState=found.stateName;
-                    model.user._university = found._id;
-                    model.searchArea = "campus"
-                    getUniversitiesByState();
-                }
-            )
+            if (typeof model.universityId !== 'undefined'){
+                universityService.findUniversityById(model.universityId).then(
+                    function (found) {
+                        model.selectedState=found.stateName;
+                        model.user._university = found._id;
+                        getUniversitiesByState();
+                    }
+                );
+            }
+
         }
         init();
 
