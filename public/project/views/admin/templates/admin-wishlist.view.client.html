@@ -72,10 +72,10 @@
                 <div class="col-xs-6 ">
                     Product IDs
                 </div>
-                <div class="col-xs-2 " >
+                <div class="col-md-2 visible-md" >
                     Created Date
                 </div>
-                <div class="col-xs-1 pull-right">
+                <div class="col-xs-3 col-md-1 pull-right">
                     <!--<a href="" ng-click="model.addDiv = 'add'" >-->
                         <!--<span class="glyphicon glyphicon-plus pull-right pd-add"></span>-->
                     </a>
@@ -89,13 +89,13 @@
                 <div class="col-xs-3 ">
                     {{item._user.username}}
                 </div>
-                <div class="col-md-6  ">
+                <div class="col-xs-6">
                     {{item.products}}
                 </div>
-                <div class="col-md-2  " >
+                <div class="col-md-2  visible-md" >
                     {{item.dateCreated | date : 'yyyy-MM-dd HH:mm:ss'}}
                 </div>
-                <div class="col-xs-1">
+                <div class="col-xs-3 col-md-1">
                     <a href="" ng-click = "model.showUpdate(item)">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
