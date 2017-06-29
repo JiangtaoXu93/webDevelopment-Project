@@ -3,7 +3,12 @@
         .module('WebProject')
         .controller('RegisterController', RegisterController);
     
-    function RegisterController($location,currentUser, userService,$rootScope,universityService) {
+    function RegisterController($location,
+                                currentUser,
+                                userService,
+                                wishlistService,
+                                $rootScope,
+                                universityService) {
 
         var model = this;
         model.user = currentUser;
@@ -78,10 +83,30 @@
                         userService
                             .register(newUser)
                             .then(function (user) {
-                                var user = user.data;
-                                $rootScope.currentUser = user;
-                                $location.url("/profile");
+                                // var user = user.data;
+                                // $rootScope.currentUser = user;
+                                //
+                                userService.findUserByUsername(username)
+                                    .then(function (user) {
+                                        var NewWishList = {
+                                            _user:user._id,
+                                            products:[]
+                                        }
+                                        wishlistService.createWishlist(NewWishList)
+                                            .then(function () {
+                                                $location.url("/profile");
+                                            });
+                                    })
 
+                                $location.url("/profile");
+                                // var NewWishList = {
+                                //     _user:user._id,
+                                //     products:[]
+                                // }
+                                // wishlistService.createWishlist(NewWishList)
+                                //     .then(function () {
+                                //         $location.url("/profile");
+                                //     });
                             });
                     }
                 );
