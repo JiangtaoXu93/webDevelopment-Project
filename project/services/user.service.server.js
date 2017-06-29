@@ -61,6 +61,7 @@ function facebookStrategy(token, refreshToken, profile, done) {
                     firstName: profile.name.givenName,
                     lastName:  profile.name.familyName,
                     email:     email,
+                    roles:["BUYER","SELLER"],
                     facebook: {
                         id:    profile.id,
                         token: token

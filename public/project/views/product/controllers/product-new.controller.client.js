@@ -33,6 +33,8 @@
                 model.error = "Title should not be empty";
              }else if (isNaN(product.price)){
                 model.error = "Price should be number";
+            }else if (typeof model.user._university === 'undefined'){
+                model.error = "Please go to your profile page to SELECT YOUR UNIVERSITY first!";
             }else{
                 model.error = "";
                 product._university = model.user._university;
