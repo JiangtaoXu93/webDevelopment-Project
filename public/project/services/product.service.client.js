@@ -103,7 +103,7 @@
         }
 
         function findProductEbayDetailById(itemId) {
-            var url = "http://open.api.ebay.com/shopping?callname=GetSingleItem&responseencoding=JSON&appid=Jiangtao-Webdev-PRD-77a8f702d-1a6a9d14&"
+            var url = "https://open.api.ebay.com/shopping?callname=GetSingleItem&responseencoding=JSON&appid=Jiangtao-Webdev-PRD-77a8f702d-1a6a9d14&"
                 +"siteid=0&"
                 +"version=967&"
                 +"IncludeSelector=Description,ItemSpecifics,ShippingCosts&"
