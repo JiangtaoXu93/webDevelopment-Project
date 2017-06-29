@@ -39,6 +39,8 @@
                 $location.url("/profile");
             }else if (sections[1] === 'wish-list'&& sections[2] === 'detail'){
                 $location.url("/wish-list");
+            }else if (sections[1] === 'wish-list'&& sections[2] === 'search'){
+                $location.url("/wish-list");
             }else if (sections[1] === 'wish-list'){
                 $location.url("/profile");
             }else if (sections[1] === 'admin'){

@@ -45,9 +45,6 @@
                     currentUser: checkCurrentUser
                 }
             })
-
-
-
             .when('/product-management', {
                 templateUrl: 'views/product/templates/product-list.view.client.html',
                 controller: 'ProductListController',
@@ -120,6 +117,15 @@
                     currentUser: checkCurrentUser
                 }
             })
+            .when('/wish-list/search', {
+                templateUrl: 'views/search/templates/product-search.view.client.html',
+                controller: 'ProductSearchController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
+            })
+
             .when('/register', {
                 templateUrl: 'views/user/templates/register.view.client.html',
                 controller: 'RegisterController',
