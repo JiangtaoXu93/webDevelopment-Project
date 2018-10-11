@@ -8,9 +8,9 @@ a second-hand online trading platform
 -------------
 
 > ABOUT ME
-  linkedln：[jiangtao-xu](https://www.linkedin.com/in/jiangtao-xu/)  
-  personal webpage[https://xu-jiangtao-webdev.herokuapp.com/](https://xu-jiangtao-webdev.herokuapp.com/)   
-  email：xujiangtao93@outlook.com
+  linkedln : [jiangtao-xu](https://www.linkedin.com/in/jiangtao-xu/)  
+  personal webpage :[https://xu-jiangtao-webdev.herokuapp.com/](https://xu-jiangtao-webdev.herokuapp.com/)   
+  email : xujiangtao93@outlook.com
 
 #### DEMO:  
 ![](https://github.com/JiangtaoXu93/webDevelopment-Project/blob/master/taoge1.png)
@@ -33,8 +33,7 @@ git clone https://github.com/JiangtaoXu93/webDevelopment-Project.git
 ```
 
 ### HOW TO USE
-https://xu-jiangtao-webdev.herokuapp.com
-
+https://xu-jiangtao-webdev.herokuapp.com/project/index.html#!/
 
 
 
