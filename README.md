@@ -21,10 +21,10 @@ a second-hand online trading platform
 - OTHER : eBay APIs, Google APIs, Facebook APIs
 
 ### WORK
-a second-hand online trading platform using AngularJS and AngularJS to implement frontend MVC pattern
-Designed and wrote version control API system with Express.js framework in Node.js server
-Implemented creating, reading, updating and deleting operations on MongoDB using Mongoose
-Fetched product information by using eBay API, and used Google, Facebook APIs to implement login authentication
+- a second-hand online trading platform using AngularJS and AngularJS to implement frontend MVC pattern
+- Designed and wrote version control API system with Express.js framework in Node.js server
+- Implemented creating, reading, updating and deleting operations on MongoDB using Mongoose
+- Fetched product information by using eBay API, and used Google, Facebook APIs to implement login authentication
 
 
 ### DOWNLOAD
