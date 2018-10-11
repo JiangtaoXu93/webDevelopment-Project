@@ -10,7 +10,6 @@ a second-hand online trading platform
 > ABOUT ME
   linkedln：[jiangtao-xu](https://www.linkedin.com/in/jiangtao-xu/)  
   personal webpage[https://xu-jiangtao-webdev.herokuapp.com/](https://xu-jiangtao-webdev.herokuapp.com/)   
-  
   email：xujiangtao93@outlook.com
 
 #### DEMO:  
@@ -29,7 +28,6 @@ Fetched product information by using eBay API, and used Google, Facebook APIs to
 
 
 ### DOWNLOAD
-DOWNLOAD:
 ```
 git clone https://github.com/JiangtaoXu93/webDevelopment-Project.git
 ```
