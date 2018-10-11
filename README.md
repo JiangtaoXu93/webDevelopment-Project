@@ -1,8 +1,4 @@
 
-## WEB DEVELOPMENT PROJECT
-a second-hand online trading platform 
-
-
 ---
 # Second-Hand Online Trading Platform
 -------------
